@@ -380,11 +380,14 @@ my_tokens = []
 
 # CREATE the datastructure for the tokens
 n=0
+lemma_for_tid = {}
 for term in my_kaf_tree.getTerms():
     n+=1
     term_id = term.getId()
     lemma = term.getLemma()
+    lemma_for_tid[term_id] = lemma
     kaf_pos = term.getPos()
+    #print>>sys.stderr,kaf_pos
     list_span = term.get_list_span()        ## List of token ids in the span layer of the term
     sentiment = term.getSentiment()
     polarity = sent_mod = None
@@ -403,6 +406,7 @@ logging.debug('Num sentences: '+str(len(sentences)))
 
 logging.debug('Obtaining opinion expressions')
 my_ops_exps = obtain_opinion_expressions(my_tokens,lang)
+print>>sys.stderr,my_ops_exps
 
 logging.debug('Obtaining targets')
 obtain_targets_improved(my_ops_exps,sentences)
@@ -421,7 +425,10 @@ for oe in my_ops_exps:
     
     ## Holder
     if len(oe.holder)!=0:
+      oe.holder.sort()
+      c = ' '.join(lemma_for_tid[tid] for tid in oe.holder)
       op_hol = etree.Element('opinion_holder')
+      op_hol.append(etree.Comment(c))
       op_ele.append(op_hol)
       span_op_hol = etree.Element('span')
       op_hol.append(span_op_hol)
@@ -432,7 +439,11 @@ for oe in my_ops_exps:
     op_tar = etree.Element('opinion_target')
     op_ele.append(op_tar)
 
+    
     if len(oe.target_ids)!=0:   ## if there are no targets, there is no opinion eleemnt
+      oe.target_ids.sort()
+      c = ' '.join(lemma_for_tid[tid] for tid in oe.target_ids)
+      op_tar.append(etree.Comment(c)) 
       span_op_tar = etree.Element('span')
       op_tar.append(span_op_tar)
       for id in oe.target_ids:
@@ -446,6 +457,9 @@ for oe in my_ops_exps:
     op_exp = etree.Element('opinion_expression',attrib={'polarity':pol,
                                                         'strength':str(oe.value)})
     op_ele.append(op_exp)
+    oe.ids.sort()
+    c = ' '.join(lemma_for_tid[tid] for tid in oe.ids)   
+    op_exp.append(etree.Comment(c)) 
     span_exp = etree.Element('span')
     op_exp.append(span_exp)
     for id in oe.ids:

@@ -351,11 +351,14 @@ logging.basicConfig(stream=sys.stderr,format='%(asctime)s - %(levelname)s - %(me
 
 ## Processing the parameters
 my_time_stamp = True
+remove_opinions = True
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"",["no-time"])
+    opts, args = getopt.getopt(sys.argv[1:],"",["no-time","no-remove-opinions"])
     for opt, arg in opts:
         if opt == "--no-time":
             my_time_stamp = False
+        elif opt == "--no-remove-opinions":
+            remove_opinions = False
 except getopt.GetoptError:
     pass
 #########################################
@@ -420,6 +423,10 @@ obtain_holders(my_ops_exps,sentences,lang)
 
 ## Create the elements
 logging.debug('Generating KAF output')
+
+if remove_opinions:
+    my_kaf_tree.remove_opinion_layer()
+    
 for oe in my_ops_exps:
     op_ele = etree.Element('opinion')
     

@@ -352,13 +352,16 @@ logging.basicConfig(stream=sys.stderr,format='%(asctime)s - %(levelname)s - %(me
 ## Processing the parameters
 my_time_stamp = True
 remove_opinions = True
+opinion_strength = True
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"",["no-time","no-remove-opinions"])
+    opts, args = getopt.getopt(sys.argv[1:],"",["no-time","no-remove-opinions","no-opinion-strength"])
     for opt, arg in opts:
         if opt == "--no-time":
             my_time_stamp = False
         elif opt == "--no-remove-opinions":
             remove_opinions = False
+        elif opt == "--no-opinion-strength":
+            opinion_strength = False
 except getopt.GetoptError:
     pass
 #########################################
@@ -461,8 +464,11 @@ for oe in my_ops_exps:
     elif oe.value < 0: pol = 'negative'
     else:  pol = 'neutral'
         
-    op_exp = etree.Element('opinion_expression',attrib={'polarity':pol,
-                                                        'strength':str(oe.value)})
+    op_exp = etree.Element('opinion_expression')
+    op_exp.set('polarity',pol)
+    if opinion_strength:
+        op_exp.set('strength',str(oe.value))
+  
     op_ele.append(op_exp)
     oe.ids.sort()
     c = ' '.join(lemma_for_tid[tid] for tid in oe.ids)   
@@ -472,8 +478,8 @@ for oe in my_ops_exps:
     for id in oe.ids:
       span_exp.append(etree.Element('target',attrib={'id':id}))
         
-      ##Append the op_ele to the opinions layer
-      my_kaf_tree.addElementToLayer('opinions', op_ele)
+    ##Append the op_ele to the opinions layer
+    my_kaf_tree.addElementToLayer('opinions', op_ele)
         
     
 my_kaf_tree.addLinguisticProcessor('Basic opinion detector with Pos','1.0','opinions', my_time_stamp)    

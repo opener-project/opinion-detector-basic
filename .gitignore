@@ -10,14 +10,12 @@ dist
 build
 eggs
 parts
-bin
 var
 sdist
 develop-eggs
 .installed.cfg
-lib
 lib64
-__pycache__
+pkg
 
 # Installer logs
 pip-log.txt
@@ -30,7 +28,20 @@ nosetests.xml
 # Translations
 *.mo
 
-# Mr Developer
+# Python related files.
+*.py[cod]
+pip-log.txt
 .mr.developer.cfg
 .project
 .pydevproject
+
+Gemfile.lock
+
+# Ignore the package files.
+core/site-packages/pre_build/*
+core/site-packages/pre_install/*
+core/vendor/build/*
+
+!.gitkeep
+
+*.log

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" charset="UTF-8" href="markdown.css"/>
+    <title>Opinion Detector Basic Webservice</title>
+  </head>
+  <body>
+    <h1>Opinion Detector Basic Webservice</h1>
+
+    <h2>Example Usage</h2>
+
+    <p>
+      <pre>opinion-detector-basic-server start</pre>
+      <pre></pre>
+    </p>
+
+    <h2>Try the webservice</h2>
+
+    <p>* required</p>
+    <p>** When entering a value no response will be displayed in the browser.</p>
+
+    <form action="<%=url("/")%>" method="POST">
+      <div>
+        <label for="input"/>Type your text here*</label>
+        <br/>
+
+        <textarea name="input" id="text" rows="10" cols="50"/></textarea>
+      </div>
+
+      <% 10.times do |t| %>
+      <div>
+        <label for="callbacks">Callback URL <%=t+1%>(**)</label>
+        <br />
+
+        <input id="callbacks" type="text" name="callbacks[]" />
+      </div>
+      <% end %>
+
+
+      <div>
+        <label for="error_callback">Error Callback</label>
+        <br />
+
+        <input id="error_callback" type="text" name="error_callback" />
+      </div>
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h2>Actions</h2>
+
+    <p>
+      <dl>
+        <dt>POST /</dt>
+        <dd>Tag the input polarized text. See arguments listing for more options.</dd>
+        <dt>GET /</dt>
+        <dd>Show this page</dd>
+      </dl>
+    </p>
+
+    <h2>Arguments</h2>
+
+    <p> The webservice takes the following arguments: </p>
+    <p>* required</p>
+
+    <dl>
+      <dt>text*</dt>
+      <dd>The input text in KAF format. Sample KAF input:</dd>
+      <pre></pre>
+
+      <dt>callbacks</dt>
+      <dd>
+            You can provide a list of callback urls. If you provide callback urls
+            the POS tagger will run as a background job and a callback
+            with the results will be performed (POST) to the first url in the callback
+            list. The other urls in callback list will be provided in the "callbacks"
+            argument.<br/><br/>
+            Using callback you can chain together several OpeNER webservices in
+        one call. The first, will call the second, which will call the third, etc.
+        See for more information the <a href="http://opener-project.github.io">
+          webservice documentation online</a>.
+      </dd>
+      <dt>error_callback</dt>
+      <dd>URL to notify if errors occur in the background process. The error
+      callback will do a POST with the error message in the 'error' field.</dd>
+      </dt>
+
+
+
+    </dl>
+
+
+    <p>
+
+    </p>
+
+  </body>
+</html>

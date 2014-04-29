@@ -12,6 +12,6 @@ task :compile => :requirements do
 end
 
 task :default => [:compile] do
-  #path = File.join(PYTHON_SITE_PACKAGES, 'pre_install')
-  #pip_install(PRE_INSTALL_REQUIREMENTS, path)
+  path = File.join(PYTHON_SITE_PACKAGES, 'pre_install')
+  pip_install(PRE_INSTALL_REQUIREMENTS, path)
 end

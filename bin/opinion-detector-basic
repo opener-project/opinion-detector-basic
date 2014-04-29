@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/opener/opinion_detectors/basic'
+require_relative '../lib/opener/opinion_detector_basic'
 
 # STDIN.tty? returns `false` if data is being piped into the current process.
 if STDIN.tty?
@@ -9,7 +9,7 @@ else
   input = STDIN.read
 end
 
-kernel                  = Opener::OpinionDetectors::Basic.new(:args => ARGV)
+kernel                  = Opener::OpinionDetectorBasic.new(:args => ARGV)
 stdout, stderr, process = kernel.run(input)
 
 if process.success?

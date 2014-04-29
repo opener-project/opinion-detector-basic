@@ -1,4 +1,4 @@
-require_relative '../../lib/opener/opinion_detectors/basic'
+require_relative '../../lib/opener/opinion_detector_basic'
 require 'rspec/expectations'
 require 'tempfile'
 
@@ -7,7 +7,7 @@ def kernel_root
 end
 
 def kernel(language)
-  return Opener::OpinionDetectors::Basic.new(
+  return Opener::OpinionDetectorBasic.new(
     :language => language,
     :args => ['--no-time']
   )

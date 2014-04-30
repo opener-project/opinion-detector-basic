@@ -14,7 +14,7 @@ module Opener
   #  @return [Hash]
   #
   class OpinionDetectorBasic
-    attr_reader :args, :options, :conf_file
+    attr_reader :args, :options
 
     def initialize(options = {})
       @args          = options.delete(:args) || []
@@ -38,7 +38,7 @@ module Opener
     # @return [Array]
     #
     def run(input)
-      return Open3.capture3(*command.split(" "), :stdin_data => input)
+      capture(input)
     end
 
     protected
@@ -49,8 +49,21 @@ module Opener
       site_packages =  File.join(core_dir, 'site-packages')
       "env PYTHONPATH=#{site_packages}:$PYTHONPATH"
     end
-
-
+    ##
+    # capture3 method doesn't work properly with Jruby, so 
+    # this is a workaround
+    #
+    
+    def capture(input)
+      Open3.popen3(*command.split(" ")) {|i, o, e, t|
+        out_reader = Thread.new { o.read }
+        err_reader = Thread.new { e.read }
+        i.write input
+        i.close
+        [out_reader.value, err_reader.value, t.value]
+      }
+    end
+    
     ##
     # @return [String]
     #

@@ -6,7 +6,7 @@ require_relative 'ext/hack/support'
 
 desc 'Lists all the files of the Gemspec'
 task :files do
-  gemspec = Gem::Specification.load('opener-opinion-detector-base.gemspec')
+  gemspec = Gem::Specification.load('opener-opinion-detector-basic.gemspec')
 
   puts gemspec.files.sort
 end

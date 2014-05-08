@@ -48,7 +48,7 @@ VENDOR_SRC_DIRECTORY = File.expand_path('../../../core/vendor/src', __FILE__)
 #
 def verify_requirements
   require_executable('python')
-  require_version('python', python_version, '2.7.0')
+  require_version('python', python_version, '2.6.0')
   require_executable('pip')
   require_version('pip', pip_version, '1.3.1')
 end

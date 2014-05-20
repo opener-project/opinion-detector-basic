@@ -1,4 +1,4 @@
-Polarity Tagger Basic
+Opinion Detector Basic
 ---------------------
 
 This module implements a opinion detector for English (also works for Dutch and

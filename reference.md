@@ -122,5 +122,8 @@ We advise to have the following environment variables available:
 
 * Dutch (nl)
 * English (en)
+* French (fr)
 * German (de)
+* Italian (it)
+* Spanish (es)
 

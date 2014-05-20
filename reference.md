@@ -4,7 +4,7 @@
 
 To tag an input KAF file example.kaf with opinions you can run:
 
-    cat example.with.polaritieskaf | core/opinion_detector_basic_multi.py > output.with.opinions.kaf
+    cat example.with.polarities.kaf | core/opinion_detector_basic_multi.py > output.with.opinions.kaf
 
 The output will the input KAF file extended with the opinion layer.
 

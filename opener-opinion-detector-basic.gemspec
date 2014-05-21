@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.summary     = 'Basic Opinion Detector.'
   gem.description = gem.summary
   gem.homepage    = 'http://opener-project.github.com/'
+  gem.extensions  = ['ext/hack/Rakefile']
 
   gem.required_ruby_version = '>= 1.9.2'
 

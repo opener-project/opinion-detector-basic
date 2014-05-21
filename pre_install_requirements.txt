@@ -1,0 +1,1 @@
+https://github.com/opener-project/VU-kaf-parser/archive/master.zip#egg=VUKafParserPy

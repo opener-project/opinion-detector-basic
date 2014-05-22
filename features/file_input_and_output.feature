@@ -9,7 +9,11 @@ Feature: Using files as input and output
     Then the output should match the fixture "<output_file>"
   Examples:
     | language | input_file            | output_file            |
-    | English  | input.1.kaf           | input.1.out.kaf        |
-    | Dutch    | input.1.nl.kaf        | input.1.nl.out.kaf     |
-    | English  | input.2.kaf           | input.2.out.kaf        |
+    | English  | input.en.kaf          | output.en.kaf          |
+    | Dutch    | input.nl.kaf          | output.nl.kaf          |
+    | German   | input.de.kaf          | output.de.kaf          |
+    | French   | input.fr.kaf          | output.fr.kaf          |
+    | Italian  | input.it.kaf          | output.it.kaf          |
+    | Spanish  | input.es.kaf          | output.es.kaf          |
+
 

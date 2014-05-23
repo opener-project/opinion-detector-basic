@@ -12,7 +12,6 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 1.9.2'
 
   gem.files = Dir.glob([
-    'core/site-packages/pre_build/**/*',
     'core/packages/*',
     'core/vendor/src/**/*',
     'core/*',

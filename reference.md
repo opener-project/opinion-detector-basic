@@ -41,7 +41,7 @@ opinion-detector-basic-server
 After launching the server, you can reach the webservice at
 <http://localhost:9292>.
 
-The webservice takes several options that get passed along to (Puma)[http://puma.io], the
+The webservice takes several options that get passed along to [Puma](http://puma.io), the
 webserver used by the component. The options are:
 
 ```

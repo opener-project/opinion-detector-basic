@@ -41,8 +41,7 @@ opinion-detector-basic-server
 After launching the server, you can reach the webservice at
 <http://localhost:9292>.
 
-The webservice takes several options that get passed along to [Puma](http://puma.io), the
-webserver used by the component. The options are:
+The webservice takes several options that get passed along to [Puma](http://puma.io), the webserver used by the component. The options are:
 
 ```
     -b, --bind URI                   URI to bind to (tcp://, unix://, ssl://)
@@ -100,9 +99,7 @@ Daemon options:
 
 #### Environment Variables
 
-These daemons make use of Amazon SQS queues and other Amazon services.
-The access to these services and other environment variables can be configured
-using a .opener-daemons-env file in the home directory of the current user.
+These daemons make use of Amazon SQS queues and other Amazon services. The access to these services and other environment variables can be configured using a .opener-daemons-env file in the home directory of the current user.
 
 It is also possible to provide the environment variables directly to the deamon.
 

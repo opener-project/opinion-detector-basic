@@ -87,6 +87,7 @@ At least you need the following system setup:
 * Ruby 1.9.3 or newer
 * Python 2.6
 * lxml: library for processing xml in python
+
 Domain Adaption
 ---------------
 

@@ -80,7 +80,8 @@ module Opener
       def add_error
         node = document.at('errors')
         error_node = Nokogiri::XML::Node.new "error", node
-        error_node['class']   = "#{klass.to_s} #{klass::VERSION}"
+        error_node['class']   = klass.to_s
+        error_node['version'] = klass::VERSION
         error_node.inner_html = error
         node.add_child(error_node)
       end     

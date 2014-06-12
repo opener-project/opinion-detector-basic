@@ -12,7 +12,6 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 1.9.2'
 
   gem.files = Dir.glob([
-    'core/packages/*',
     'core/vendor/src/**/*',
     'core/*',
     'ext/**/*',
@@ -21,12 +20,12 @@ Gem::Specification.new do |gem|
     '*.gemspec',
     '*_requirements.txt',
     'README.md',
-    'exec/**/*'
+    'exec/**/*',
+    'task/*'
   ]).select { |file| File.file?(file) }
 
   gem.executables = Dir.glob('bin/*').map { |file| File.basename(file) }
 
-  gem.add_dependency 'opener-build-tools', ['>= 0.2.7']
   gem.add_dependency 'rake'
   gem.add_dependency 'sinatra'
   gem.add_dependency 'httpclient'
@@ -35,6 +34,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'opener-core', ['>= 0.1.2']
   gem.add_dependency 'opener-webservice'
   gem.add_dependency 'nokogiri'
+  gem.add_dependency 'cliver'
 
   gem.add_development_dependency 'rspec', '~> 3.0'
   gem.add_development_dependency 'cucumber'

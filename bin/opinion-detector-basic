@@ -12,8 +12,4 @@ end
 kernel                  = Opener::OpinionDetectorBasic.new(:args => ARGV)
 stdout, stderr, process = kernel.run(input)
 
-if process.success?
-  puts stdout
-else
-  abort stderr
-end
+puts stdout

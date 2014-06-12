@@ -8,7 +8,7 @@ this_folder = os.path.dirname(os.path.realpath(__file__))
 
 # This updates the load path to ensure that the local site-packages directory
 # can be used to load packages (e.g. a locally installed copy of lxml).
-sys.path.append(os.path.join(this_folder, 'site-packages/pre_build'))
+sys.path.append(os.path.join(this_folder, 'site-packages/pre_install'))
 
 from VUKafParserPy import KafParser
 from collections import defaultdict
@@ -26,7 +26,7 @@ def mix_lists(l1,l2):
   for x in range(min_l):
     newl.append(l1[x])
     newl.append(l2[x])
-  
+
   if len(l1)>len(l2):
     newl.extend(l1[min_l:])
   elif len(l2)>len(l1):
@@ -43,13 +43,13 @@ class OpinionExpression:
         self.candidates_r=[]
         self.candidates_l=[]
         self.holder = []
-    
+
     def __repr__(self):
         r='Ids:'+'#'.join(self.ids)+' Sent:'+self.sentence+' Value:'+str(self.value)+ ' Target:'+'#'.join(self.target_ids)+'\n'
         r+='Right cand: '+str(self.candidates_r)+'\n'
         r+='Left cand: '+str(self.candidates_l)+'\n'
-        return r        
-    
+        return r
+
 class MyToken:
     def __init__(self,id,lemma,pos,polarity,sent_mod,sent):
         self.id = id
@@ -61,39 +61,39 @@ class MyToken:
         self.use_it = True
         self.list_ids = [id]
         self.value = 0
-       
-       
+
+
         if polarity == 'positive':
             self.value = 1
         elif polarity == 'negative':
             self.value = -1
-        
+
         if sent_mod == 'intensifier':
             self.value = 2
         elif sent_mod == 'shifter':
             self.value = -1
 
-    
+
     def isNegator(self):
         return self.sent_mod == 'shifter'
-    
 
-    
+
+
     def isIntensifier(self):
         return self.sent_mod == 'intensifier'
-    
-        
+
+
     def is_opinion_expression(self):
         return self.use_it and self.polarity is not None
-        
-        
+
+
     def __repr__(self):
         if self.use_it:
             return self.id+' lemma:'+self.lemma.encode('utf-8')+'.'+self.pos.encode('utf-8')+' pol:'+str(self.polarity)+' sentmod:'+str(self.sent_mod)+' sent:'+self.sentence+' use:'+str(self.use_it)+' list:'+'#'.join(self.list_ids)+' val:'+str(self.value)
         else:
             return '\t'+self.id+' lemma:'+self.lemma.encode('utf-8')+'.'+self.pos.encode('utf-8')+' pol:'+str(self.polarity)+' sentmod:'+str(self.sent_mod)+' sent:'+self.sentence+' use:'+str(self.use_it)+' list:'+'#'.join(self.list_ids)+' val:'+str(self.value)
-        
-        
+
+
 
 def obtain_opinion_expressions(tokens,lang='nl'):
     logging.debug('  Obtaining opinion expressions')
@@ -118,7 +118,7 @@ def obtain_opinion_expressions(tokens,lang='nl'):
                     logging.debug('    Accucumating '+'-'.join(my_tokens[t+1].list_ids))
             t+=1
     ###########################################
-    
+
     ##Apply intensifiers/negators over the next elements
     if apply_modifiers:
         logging.debug('   Applying modifiers')
@@ -133,7 +133,7 @@ def obtain_opinion_expressions(tokens,lang='nl'):
                     logging.debug('    Applied modifier over '+'-'.join(my_tokens[t+1].list_ids))
             t += 1
     ###########################################
-    
+
     if apply_conjunctions:
         if lang=='nl':
             concat = [',','en']
@@ -148,8 +148,8 @@ def obtain_opinion_expressions(tokens,lang='nl'):
         elif lang == 'fr':
             concat=[',','et']
         logging.debug('  Applying conjunctions:'+str(concat))
-            
-    
+
+
         t = 0
         while t < len(my_tokens):
           if my_tokens[t].use_it and my_tokens[t].value!=0: ## Find the first one
@@ -160,12 +160,12 @@ def obtain_opinion_expressions(tokens,lang='nl'):
             value_aux = my_tokens[t].value
             my_tokens[t].use_it = False
             #print 'Modified',my_tokens[t]
-            
+
             x = t+1
             while True:
                 if x>=len(my_tokens):
                     break
-                
+
                 if my_tokens[x].lemma in concat:
                     ## list_aux += my_tokens[x].list_ids Dont use it as part of the OE
                     my_tokens[x].use_it = False
@@ -174,7 +174,7 @@ def obtain_opinion_expressions(tokens,lang='nl'):
                      #print '\Also ',my_tokens[x]
                      logging.debug('    Found token '+str(my_tokens[x]))
                      list_aux += my_tokens[x].list_ids
-                     
+
                      used.append(x)
                      my_tokens[x].use_it = False
                      value_aux += my_tokens[x].value
@@ -183,7 +183,7 @@ def obtain_opinion_expressions(tokens,lang='nl'):
                     break
             #print 'OUT OF THE WHILE'
             ##The last one in the list used is the one accumulating all
-            
+
             last_pos = used[-1]
             my_tokens[last_pos].value = value_aux
             my_tokens[last_pos].list_ids = list_aux
@@ -193,8 +193,8 @@ def obtain_opinion_expressions(tokens,lang='nl'):
             #print
             #print
           t += 1
-      
-      
+
+
     ## Create OpinionExpression
     my_opinion_exps = []
     logging.debug('   Generating output')
@@ -205,7 +205,7 @@ def obtain_opinion_expressions(tokens,lang='nl'):
     return my_opinion_exps
 
 
-'''   
+'''
 def get_distance(id1, id2):
     pos1 = int(id1[id1.find('_')+1:])
     pos2 = int(id2[id2.find('_')+1:])
@@ -214,7 +214,7 @@ def get_distance(id1, id2):
     else:
         return pos2-pos1
 '''
-   
+
 
 def obtain_holders(ops_exps,sentences,lang):
     if lang=='nl':
@@ -229,9 +229,9 @@ def obtain_holders(ops_exps,sentences,lang):
         holders = ['ich','du','wir','ihr','sie','er']
     elif lang == 'fr':
         holders = ['je','tu','lui','elle','nous','vous','ils','elles']
-        
+
     logging.debug('Obtaining holders with list: '+str(holders))
-        
+
     for oe in ops_exps:
         sent = oe.sentence
         list_terms = sentences[str(sent)]
@@ -254,24 +254,24 @@ def obtain_targets_improved(ops_exps,sentences):
     logging.debug('  Obtaining targets improved')
     #print>>sys.stderr,'#'*40
     #print>>sys.stderr,'#'*40
-    
+
     #print>>sys.stderr,'Beginning with obtain targets'
     ##sentences --> dict   [str(numsent)] ==> list of (lemma, term)id
-    
+
     all_ids_in_oe = []
     for oe in ops_exps:
         all_ids_in_oe.extend(oe.ids)
     #print>>sys.stderr,'All list of ids in oe',all_ids_in_oe
-    
+
     for oe in ops_exps:
         #print>>sys.stderr,'\tOE:',oe
         logging.debug('   OpExp: '+str(oe))
-        
+
         ids_in_oe = oe.ids
         sent = oe.sentence
         list_terms = sentences[str(sent)]
         #print>>sys.stderr,'\t\tTerms in sent:',list_terms
-        
+
         ###########################################
         #First rule: noun to the right within maxdistance tokens
         max_distance_right = 3
@@ -279,7 +279,7 @@ def obtain_targets_improved(ops_exps,sentences):
         for idx, (lemma,pos,term_id) in enumerate(list_terms):
             if term_id in ids_in_oe:
                 biggest_index = idx
-        
+
         #print>>sys.stderr,'\t\tBI',biggest_index
         if biggest_index+1 >= len(list_terms):  ## is the last element and we shall skip it
             #print>>sys.stderr,'\t\tNot possible to apply 1st rule'
@@ -294,7 +294,7 @@ def obtain_targets_improved(ops_exps,sentences):
             #print>>sys.stderr,'\t\tCandidates for right rule no filter',oe.__candidates_right
 
         ######################################################################################
-        
+
 
         ###########################################
         max_distance_left = 3
@@ -315,14 +315,14 @@ def obtain_targets_improved(ops_exps,sentences):
             oe.candidates_l = filter_candidates(candidates,all_ids_in_oe)
             logging.debug('  Candidates filtered left: '+str(oe.candidates_l))
 
-        ######################################################################################   
-        
+        ######################################################################################
+
     #print>>sys.stderr,'#'*40
     #print>>sys.stderr,'#'*40
-    
+
     ## filling or.target_ids
     assigned_as_targets = []
-    
+
     # First we assing to all the first in the right, if any, and not assigned
     logging.debug(' Applying first to the right rule')
     for oe in ops_exps:
@@ -334,7 +334,7 @@ def obtain_targets_improved(ops_exps,sentences):
               ###assigned_as_targets.append(id) 	#Uncomment to avoid selection of the same target moe than once
               logging.debug('  OpExp '+str(oe)+' selected '+id)
               #print>>sys.stderr,'Asignamos',id
-    
+
     logging.debug(' Applying most close rule')
     for oe in ops_exps:
         if len(oe.target_ids) == 0:  # otherwise it's solved
@@ -346,7 +346,7 @@ def obtain_targets_improved(ops_exps,sentences):
                     logging.debug('  OpExp '+str(oe)+' selected '+id)
                     break
 
-######## MAIN ROUTINE ############                
+######## MAIN ROUTINE ############
 
 ## Check if we are reading from a pipeline
 if sys.stdin.isatty():
@@ -384,8 +384,8 @@ except Exception as e:
     print>>sys.stderr,'Stream input must be a valid KAF file'
     print>>sys.stderr,'Error: ',str(e)
     sys.exit(-1)
-    
-    
+
+
 lang = my_kaf_tree.getLanguage()
 ## Creating data structure
 sentences = defaultdict(list)
@@ -410,7 +410,7 @@ for term in my_kaf_tree.getTerms():
         sent_mod = sentiment.getSentimentModifier()
     sentence = my_kaf_tree.getToken(list_span[0]).get('sent')   ## The sentence of the first token element in span
     my_tokens.append(MyToken(term_id,lemma,kaf_pos,polarity,sent_mod,sentence))
-    
+
     sentences[str(sentence)].append((lemma,kaf_pos,term_id))
 #############################
 
@@ -437,10 +437,10 @@ logging.debug('Generating KAF output')
 
 if remove_opinions:
     my_kaf_tree.remove_opinion_layer()
-    
+
 for oe in my_ops_exps:
     op_ele = etree.Element('opinion')
-    
+
     ## Holder
     if len(oe.holder)!=0:
       oe.holder.sort()
@@ -452,48 +452,48 @@ for oe in my_ops_exps:
       op_hol.append(span_op_hol)
       for id in oe.holder:
         span_op_hol.append(etree.Element('target',attrib={'id':id}))
-    
+
     ## Target
     op_tar = etree.Element('opinion_target')
     op_ele.append(op_tar)
 
-    
+
     if len(oe.target_ids)!=0:   ## if there are no targets, there is no opinion eleemnt
       oe.target_ids.sort()
       c = ' '.join(lemma_for_tid[tid] for tid in oe.target_ids)
-      op_tar.append(etree.Comment(c)) 
+      op_tar.append(etree.Comment(c))
       span_op_tar = etree.Element('span')
       op_tar.append(span_op_tar)
       for id in oe.target_ids:
         span_op_tar.append(etree.Element('target',attrib={'id':id}))
-        
+
     #Expression
     if oe.value > 0:  pol = 'positive'
     elif oe.value < 0: pol = 'negative'
     else:  pol = 'neutral'
-        
+
     op_exp = etree.Element('opinion_expression')
     op_exp.set('polarity',pol)
     if opinion_strength:
         op_exp.set('strength',str(oe.value))
-  
+
     op_ele.append(op_exp)
     oe.ids.sort()
-    c = ' '.join(lemma_for_tid[tid] for tid in oe.ids)   
-    op_exp.append(etree.Comment(c)) 
+    c = ' '.join(lemma_for_tid[tid] for tid in oe.ids)
+    op_exp.append(etree.Comment(c))
     span_exp = etree.Element('span')
     op_exp.append(span_exp)
     for id in oe.ids:
       span_exp.append(etree.Element('target',attrib={'id':id}))
-        
+
     ##Append the op_ele to the opinions layer
     my_kaf_tree.addElementToLayer('opinions', op_ele)
-        
-    
-my_kaf_tree.addLinguisticProcessor('Basic opinion detector with Pos','1.0','opinions', my_time_stamp)    
+
+
+my_kaf_tree.addLinguisticProcessor('Basic opinion detector with Pos','1.0','opinions', my_time_stamp)
 my_kaf_tree.saveToFile(sys.stdout)
 logging.debug('Process finished')
 
 
-    
+
 

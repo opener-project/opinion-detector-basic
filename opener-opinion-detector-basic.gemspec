@@ -7,11 +7,11 @@ Gem::Specification.new do |gem|
   gem.summary     = 'Basic Opinion Detector.'
   gem.description = gem.summary
   gem.homepage    = 'http://opener-project.github.com/'
+  gem.extensions  = ['ext/hack/Rakefile']
 
   gem.required_ruby_version = '>= 1.9.2'
 
   gem.files = Dir.glob([
-    'core/site-packages/pre_build/**/*',
     'core/packages/*',
     'core/vendor/src/**/*',
     'core/*',
@@ -20,7 +20,8 @@ Gem::Specification.new do |gem|
     'config.ru',
     '*.gemspec',
     '*_requirements.txt',
-    'README.md'
+    'README.md',
+    'exec/**/*'
   ]).select { |file| File.file?(file) }
 
   gem.executables = Dir.glob('bin/*').map { |file| File.basename(file) }
@@ -30,6 +31,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'sinatra'
   gem.add_dependency 'httpclient'
   gem.add_dependency 'puma'
+  gem.add_dependency 'opener-daemons'
+  gem.add_dependency 'opener-core', ['>= 0.1.2']
   gem.add_dependency 'opener-webservice'
   gem.add_dependency 'nokogiri'
 

@@ -1,5 +1,5 @@
 require_relative '../../lib/opener/opinion_detector_basic'
-require 'rspec/expectations'
+require 'rspec'
 require 'tempfile'
 
 def kernel_root
@@ -11,4 +11,14 @@ def kernel(language)
     :language => language,
     :args => ['--no-time']
   )
+end
+
+RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
 end

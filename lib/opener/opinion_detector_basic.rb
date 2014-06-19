@@ -1,7 +1,6 @@
 require 'open3'
 
 require_relative 'opinion_detector_basic/version'
-require_relative 'opinion_detector_basic/error_layer'
 
 module Opener
 
@@ -46,7 +45,7 @@ module Opener
         return stdout
         
       rescue Exception => error
-        return ErrorLayer.new(input, error.message, self.class).add
+        return Opener::Core::ErrorLayer.new(input, error.message, self.class).add
       end
     end
 

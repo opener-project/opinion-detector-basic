@@ -1,4 +1,5 @@
 require 'open3'
+require 'opener/core'
 
 require_relative 'opinion_detector_basic/version'
 

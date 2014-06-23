@@ -40,7 +40,6 @@ module Opener
     #
     def run(input)
       begin
-        capture(input)
         stdout, stderr, process = capture(input)
         raise stderr unless process.success?
         return stdout

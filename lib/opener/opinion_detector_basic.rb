@@ -28,7 +28,7 @@ module Opener
     # @param [Array] args Commandline arguments passed to the command.
     #
     def command
-      return "#{adjust_python_path} python -E -OO #{kernel} #{args.join(' ')}"
+      return "#{adjust_python_path} python -E #{kernel} #{args.join(' ')}"
     end
 
     ##
@@ -43,7 +43,7 @@ module Opener
         stdout, stderr, process = capture(input)
         raise stderr unless process.success?
         return stdout
-        
+
       rescue Exception => error
         return Opener::Core::ErrorLayer.new(input, error.message, self.class).add
       end
@@ -58,10 +58,10 @@ module Opener
       "env PYTHONPATH=#{site_packages}:$PYTHONPATH"
     end
     ##
-    # capture3 method doesn't work properly with Jruby, so 
+    # capture3 method doesn't work properly with Jruby, so
     # this is a workaround
     #
-    
+
     def capture(input)
       Open3.popen3(*command.split(" ")) {|i, o, e, t|
         out_reader = Thread.new { o.read }
@@ -71,7 +71,7 @@ module Opener
         [out_reader.value, err_reader.value, t.value]
       }
     end
-    
+
     ##
     # @return [String]
     #

@@ -1,7 +1,7 @@
 require 'open3'
+require 'opener/core'
 
 require_relative 'opinion_detector_basic/version'
-require_relative 'opinion_detector_basic/error_layer'
 
 module Opener
 
@@ -40,13 +40,12 @@ module Opener
     #
     def run(input)
       begin
-        capture(input)
         stdout, stderr, process = capture(input)
         raise stderr unless process.success?
         return stdout
         
       rescue Exception => error
-        return ErrorLayer.new(input, error.message, self.class).add
+        return Opener::Core::ErrorLayer.new(input, error.message, self.class).add
       end
     end
 

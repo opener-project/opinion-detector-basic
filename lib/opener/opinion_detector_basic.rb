@@ -1,25 +1,31 @@
 require 'open3'
-require 'opener/core'
+require 'slop'
 
 require_relative 'opinion_detector_basic/version'
+require_relative 'opinion_detector_basic/cli'
 
 module Opener
-
-
   ##
-  # The basic Opinion detector.
+  # Rule based opinion detector.
   #
   # @!attribute [r] args
   #  @return [Array]
+  #
   # @!attribute [r] options
   #  @return [Hash]
   #
   class OpinionDetectorBasic
     attr_reader :args, :options
 
+    ##
+    # @param [Hash] options
+    #
+    # @option options [Array] :args Command-line arguments to pass to the
+    #  underlying Python kernel.
+    #
     def initialize(options = {})
-      @args          = options.delete(:args) || []
-      @options       = options
+      @args    = options.delete(:args) || []
+      @options = options
     end
 
     ##
@@ -32,36 +38,35 @@ module Opener
     end
 
     ##
-    # Runs the command and returns the output of STDOUT, STDERR and the
-    # process information.
+    # Processes an input KAF document and returns the results as a new KAF
+    # document.
     #
-    # @param [String] input The input to tag.
-    # @return [Array]
+    # @param [String] input
+    # @return [String]
     #
     def run(input)
-      begin
-        stdout, stderr, process = capture(input)
-        raise stderr unless process.success?
-        return stdout
+      stdout, stderr, process = capture(input)
 
-      rescue Exception => error
-        return Opener::Core::ErrorLayer.new(input, error.message, self.class).add
-      end
+      raise stderr unless process.success?
+
+      return stdout
     end
 
     protected
+
     ##
     # @return [String]
     #
     def adjust_python_path
       site_packages =  File.join(core_dir, 'site-packages')
-      "env PYTHONPATH=#{site_packages}:$PYTHONPATH"
+
+      return "env PYTHONPATH=#{site_packages}:$PYTHONPATH"
     end
+
     ##
     # capture3 method doesn't work properly with Jruby, so
     # this is a workaround
     #
-
     def capture(input)
       Open3.popen3(*command.split(" ")) {|i, o, e, t|
         out_reader = Thread.new { o.read }
@@ -91,9 +96,8 @@ module Opener
     #
     def language(input)
       document = Nokogiri::XML(input)
-      language = document.at('KAF').attr('xml:lang')
-      return language
-    end
 
+      return document.at('KAF').attr('xml:lang')
+    end
   end # OpinionDetectorBasic
 end # Opener

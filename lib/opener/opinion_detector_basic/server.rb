@@ -1,5 +1,3 @@
-require 'sinatra/base'
-require 'httpclient'
 require 'opener/webservice'
 
 module Opener
@@ -7,10 +5,11 @@ module Opener
     ##
     # Basic opinion detector server powered by Sinatra.
     #
-    class Server < Webservice
+    class Server < Webservice::Server
       set :views, File.expand_path('../views', __FILE__)
-      text_processor OpinionDetectorBasic
-      accepted_params :input
+
+      self.text_processor  = OpinionDetectorBasic
+      self.accepted_params = [:input]
     end # Server
   end # OpinionDetectorBasic
 end # Opener

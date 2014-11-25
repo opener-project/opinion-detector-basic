@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'puma/cli'
+require 'opener/webservice'
 
-rack_config = File.expand_path('../../config.ru', __FILE__)
+parser = Opener::Webservice::OptionParser.new(
+  'opener-opinion-detector-basic',
+  File.expand_path('../../config.ru', __FILE__)
+)
 
-cli = Puma::CLI.new([rack_config] + ARGV)
-cli.run
+parser.run

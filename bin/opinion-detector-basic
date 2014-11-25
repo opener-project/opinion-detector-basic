@@ -2,14 +2,6 @@
 
 require_relative '../lib/opener/opinion_detector_basic'
 
-# STDIN.tty? returns `false` if data is being piped into the current process.
-if STDIN.tty?
-  input = nil
-else
-  input = STDIN.read
-end
+cli = Opener::OpinionDetectorBasic::CLI.new
 
-kernel                  = Opener::OpinionDetectorBasic.new(:args => ARGV)
-stdout, stderr, process = kernel.run(input)
-
-puts stdout
+cli.run

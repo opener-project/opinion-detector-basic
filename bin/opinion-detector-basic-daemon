@@ -2,9 +2,10 @@
 
 require 'opener/daemons'
 
-exec_path = File.expand_path('../../exec/opinion-detector-basic.rb', __FILE__)
-
-Opener::Daemons::Controller.new(
-  :name      => 'opinion-detector-basic',
+exec_path  = File.expand_path('../../exec/opinion-detector-basic.rb', __FILE__)
+controller = Opener::Daemons::Controller.new(
+  :name      => 'opener-opinion-detector-basic',
   :exec_path => exec_path
 )
+
+controller.run

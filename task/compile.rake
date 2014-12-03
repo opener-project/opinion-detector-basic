@@ -1,2 +1,2 @@
 desc 'Verifies requirements and compiles the core'
-task :compile => ['requirements', 'c:compile', 'python:compile']
+task :compile => ['requirements', 'python:compile']

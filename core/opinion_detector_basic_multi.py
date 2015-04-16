@@ -115,7 +115,7 @@ def obtain_opinion_expressions(tokens,lang='nl'):
                     my_tokens[t].use_it = False
                     my_tokens[t+1].value *= my_tokens[t].value
                     my_tokens[t+1].list_ids += my_tokens[t].list_ids
-                    logging.debug('    Accucumating '+'-'.join(my_tokens[t+1].list_ids))
+                    logging.debug('    Accumulating '+'-'.join(my_tokens[t+1].list_ids))
             t+=1
     ###########################################
 

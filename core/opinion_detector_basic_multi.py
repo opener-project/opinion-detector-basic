@@ -108,21 +108,27 @@ def obtain_opinion_expressions(tokens,lang='nl'):
         logging.debug('   Accumulating modifiers')
         t = 0
         while t < len(my_tokens):
-            if my_tokens[t].isNegator() or my_tokens[t].isIntensifier():
-                if t+1 < len(my_tokens) and ( my_tokens[t+1].isNegator() or my_tokens[t+1].isIntensifier()):
-                  if my_tokens[t+1].isNegator():
-                    my_tokens[t+1].value *= my_tokens[t].value
-                    logging.debug('    Accumulating '+'-'.join(my_tokens[t+1].list_ids))
-                  if my_tokens[t+1].isIntensifier():
-                    my_tokens[t+1].value += my_tokens[t].value
-
-                  ## There are 2 negators/intensifiers next to each other
-                  ## The first one is deactivated and the second one is modified
-                  my_tokens[t].use_it = False
-                  my_tokens[t+1].list_ids += my_tokens[t].list_ids
-                  logging.debug('    Accumulating '+'-'.join(my_tokens[t+1].list_ids))
-                    
-            t+=1
+          if t+1 < len(my_tokens):
+            if (my_tokens[t].isNegator() or my_tokens[t].isIntensifier()) and my_tokens[t+1].isNegator():
+              my_tokens[t+1].value *= my_tokens[t].value
+              my_tokens[t].use_it = False
+              my_tokens[t+1].list_ids += my_tokens[t].list_ids
+              logging.debug('    Accumulating '+'-'.join(my_tokens[t+1].list_ids))
+            elif my_tokens[t].isNegator() and my_tokens[t+1].isIntensifier():
+              my_tokens[t+1].value *= -1
+              my_tokens[t].use_it = False
+              my_tokens[t+1].list_ids += my_tokens[t].list_ids
+              logging.debug('    Accumulating '+'-'.join(my_tokens[t+1].list_ids))
+            elif my_tokens[t].isIntensifier() and my_tokens[t+1].isIntensifier():
+              if my_tokens[t].value >= 0:
+                my_tokens[t+1].value = my_tokens[t].value + my_tokens[t+1].value
+              else:
+                my_tokens[t+1].value = my_tokens[t].value - my_tokens[t+1].value
+              my_tokens[t].use_it = False
+              my_tokens[t+1].list_ids += my_tokens[t].list_ids
+              logging.debug('    Accumulating '+'-'.join(my_tokens[t+1].list_ids))
+              
+          t+=1
     ###########################################
 
     ##Apply intensifiers/negators over the next elements
@@ -133,6 +139,7 @@ def obtain_opinion_expressions(tokens,lang='nl'):
             if my_tokens[t].use_it and (my_tokens[t].isNegator() or my_tokens[t].isIntensifier()):
                 ## Try to modify the next token:
                 if t+1<len(my_tokens):
+                    #print 'Score: ',my_tokens[t]
                     my_tokens[t+1].value *= my_tokens[t].value
                     my_tokens[t+1].list_ids += my_tokens[t].list_ids
                     my_tokens[t].use_it = False

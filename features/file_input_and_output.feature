@@ -10,6 +10,7 @@ Feature: Using files as input and output
   Examples:
     | language | input_file            | output_file            |
     | English  | input.en.kaf          | output.en.kaf          |
+    | English  | input_with_shift_negate.en.kaf | output_with_shift_negate.en.kaf |
     | Dutch    | input.nl.kaf          | output.nl.kaf          |
     | German   | input.de.kaf          | output.de.kaf          |
     | French   | input.fr.kaf          | output.fr.kaf          |

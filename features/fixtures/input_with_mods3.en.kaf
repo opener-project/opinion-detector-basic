@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<KAF xml:lang="en" version="v1.opener">
+  <kafHeader>
+    <fileDesc />
+    <linguisticProcessors layer="text">
+      <lp name="opener-sentence-splitter-en" timestamp="2015-04-17T12:27:28Z" version="0.0.1" />
+      <lp name="opener-tokenizer-en" timestamp="2015-04-17T12:27:28Z" version="1.0.1" />
+    </linguisticProcessors>
+    <linguisticProcessors layer="terms">
+      <lp name="ehu-pos-en" timestamp="2015-04-17T12:27:28+0000" version="1.0" />
+      <lp timestamp="2015-04-17T12:27:28UTC" version="21may2014_1.2" name="VUA polarity tagger multilanguage" />
+    </linguisticProcessors>
+    <linguisticProcessors layer="features">
+      <lp version="16jan2015-2.0" name="VUA property tagger" timestamp="2015-04-17T12:27:29UTC" />
+    </linguisticProcessors>
+  </kafHeader>
+  <text>
+    <wf wid="w1" sent="1" para="1" offset="0" length="3">the</wf>
+    <wf wid="w2" sent="1" para="1" offset="4" length="5">hotel</wf>
+    <wf wid="w3" sent="1" para="1" offset="10" length="3">was</wf>
+    <wf wid="w4" sent="1" para="1" offset="14" length="3">not</wf>
+    <wf wid="w5" sent="1" para="1" offset="18" length="4">very</wf>
+    <wf wid="w6" sent="1" para="1" offset="23" length="4">very</wf>
+    <wf wid="w7" sent="1" para="1" offset="28" length="4">nice</wf>
+  </text>
+  <terms>
+    <!-- the -->
+    <term tid="t1" type="close" lemma="the" pos="D" morphofeat="DT">
+      <span>
+        <target id="w1" />
+      </span>
+    </term>
+    <!-- hotel -->
+    <term tid="t2" type="open" lemma="hotel" pos="N" morphofeat="NN">
+      <span>
+        <target id="w2" />
+      </span>
+      <sentiment polarity="neutral" resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf" />
+    </term>
+    <!-- was -->
+    <term tid="t3" type="open" lemma="be" pos="V" morphofeat="VBD">
+      <span>
+        <target id="w3" />
+      </span>
+    </term>
+    <!-- not -->
+    <term tid="t4" type="open" lemma="not" pos="A" morphofeat="RB">
+      <span>
+        <target id="w4" />
+      </span>
+      <sentiment resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf" sentiment_modifier="shifter" />
+    </term>
+    <!-- very -->
+    <term tid="t5" type="open" lemma="very" pos="A" morphofeat="RB">
+      <span>
+        <target id="w5" />
+      </span>
+      <sentiment resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf" sentiment_modifier="intensifier" />
+    </term>
+    <!-- very -->
+    <term tid="t6" type="open" lemma="very" pos="A" morphofeat="RB">
+      <span>
+        <target id="w6" />
+      </span>
+      <sentiment resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf" sentiment_modifier="intensifier" />
+    </term>
+    <!-- nice -->
+    <term tid="t7" type="open" lemma="nice" pos="G" morphofeat="JJ">
+      <span>
+        <target id="w7" />
+      </span>
+      <sentiment polarity="positive" resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf" />
+    </term>
+  </terms>
+  <features>
+    <properties />
+  </features>
+</KAF>

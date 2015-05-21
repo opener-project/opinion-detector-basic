@@ -1,8 +1,0 @@
-import File.expand_path('../../../task/requirements.rake', __FILE__)
-import File.expand_path('../../../task/python.rake', __FILE__)
-
-task :default => :requirements do
-  Dir.chdir(File.expand_path('../../../', __FILE__)) do
-    Rake::Task['core/site-packages/pre_install'].invoke
-  end
-end

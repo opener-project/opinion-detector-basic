@@ -3,14 +3,11 @@ Given /^the fixture file "(.*?)"$/ do |filename|
   @filename = filename
 end
 
-Given /^the language "(.*?)"$/ do |language|
-  @language = language
-end
-
 Given /^I put them through the kernel$/ do
   tmp_filename = "output_#{rand(1000)}_#{@filename}"
-  @output    = tmp_file(tmp_filename)
-  output, *_ = kernel(@language).run(File.read(@input))
+  @output       = tmp_file(@tmp_filename)
+  input         = File.read(@input)
+  output, *_    = kernel.run(input)
 
   File.open(@output, 'w') do |handle|
     handle.write(output)
@@ -18,21 +15,18 @@ Given /^I put them through the kernel$/ do
 end
 
 Then /^the output should match the fixture "(.*?)"$/ do |filename|
-  fixture_output = File.read(fixture_file(filename))
-  output = File.read(@output)
+  fixture_output = File.read(fixture_file(filename)).strip
+  output         = File.read(@output).strip
+
   output.should eql(fixture_output)
 end
 
 def fixture_file(filename)
-  File.absolute_path("features/fixtures/", kernel_root) + "/#{filename}"
+  File.expand_path("../../../features/fixtures/#{filename}", __FILE__)
 end
 
 def tmp_file(filename)
-  tmp_dir = File.expand_path("tmp", kernel_root)
-  if File.directory?(tmp_dir)
-    return tmp_dir + "/" + filename
-  else
-    Tempfile.new(filename).path
-  end
+  File.expand_path("../../../tmp/#{filename}", __FILE__)
 end
+
 

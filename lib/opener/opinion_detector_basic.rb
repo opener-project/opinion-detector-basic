@@ -1,8 +1,13 @@
-require 'open3'
 require 'slop'
+require 'oga'
+require 'monitor'
+
+require 'rexml/document'
+require 'rexml/formatters/pretty'
 
 require_relative 'opinion_detector_basic/version'
 require_relative 'opinion_detector_basic/cli'
+require_relative 'opinion_detector_basic/processor'
 
 module Opener
   ##

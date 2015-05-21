@@ -103,11 +103,7 @@ At least you need the following system setup:
 
 ### Depenencies for normal use:
 
-* Ruby 1.9.3 or newer
-* Python 2.6
-* lxml: library for processing xml in python
-* libarchive, on Debian/Ubuntu based systems this can be installed using
-  `sudo apt-get install libarchive-dev`
+* Tested on Ruby 2.1.5, 2.2.2, Rubinius 2.4.0, jruby-1.7.8
 
 ## Domain Adaption
 

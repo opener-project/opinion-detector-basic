@@ -10,12 +10,13 @@ Feature: Using files as input and output
   Examples:
     | language | input_file            | output_file            |
     | English  | input.en.kaf          | output.en.kaf          |
+    | English  | input2.en.kaf          | output2.en.kaf          |
+    | English  | input3.en.kaf          | output3.en.kaf          |
     | English  | input_with_mods.en.kaf | output_with_mods.en.kaf |
     | English  | input_with_mods2.en.kaf | output_with_mods2.en.kaf |
+    | English  | input_with_mods3.en.kaf | output_with_mods3.en.kaf |
     | Dutch    | input.nl.kaf          | output.nl.kaf          |
     | German   | input.de.kaf          | output.de.kaf          |
     | French   | input.fr.kaf          | output.fr.kaf          |
-    | Italian  | input.it.kaf          | output.it.kaf          |
-    | Spanish  | input.es.kaf          | output.es.kaf          |
 
 

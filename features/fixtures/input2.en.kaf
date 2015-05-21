@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?> 
+<KAF xml:lang="en" version="v1.opener">
+  <kafHeader>
+    <fileDesc/>
+    <linguisticProcessors layer="text">
+      <lp name="opener-sentence-splitter-en" timestamp="2015-05-21T09:47:50Z" version="0.0.1"/>
+      <lp name="opener-tokenizer-en" timestamp="2015-05-21T09:47:50Z" version="1.0.1"/>
+    </linguisticProcessors>
+    <linguisticProcessors layer="terms">
+      <lp name="ehu-pos-en" timestamp="2015-05-21T09:47:51+0000" version="1.0"/>
+      <lp timestamp="2015-05-21T09:47:51UTC" version="21may2014_1.2" name="VUA polarity tagger multilanguage"/>
+    </linguisticProcessors>
+  </kafHeader>
+  <text>
+    <wf wid="w1" sent="1" para="1" offset="0" length="4">this</wf>
+    <wf wid="w2" sent="1" para="1" offset="5" length="5">hotel</wf>
+    <wf wid="w3" sent="1" para="1" offset="11" length="3">was</wf>
+    <wf wid="w4" sent="1" para="1" offset="15" length="7">awesome</wf>
+    <wf wid="w5" sent="1" para="1" offset="22" length="1">!</wf>
+    <wf wid="w6" sent="2" para="1" offset="24" length="2">it</wf>
+    <wf wid="w7" sent="2" para="1" offset="27" length="6">really</wf>
+    <wf wid="w8" sent="2" para="1" offset="34" length="3">was</wf>
+  </text>
+  <terms>
+    <!--this-->
+    <term tid="t1" type="close" lemma="this" pos="D" morphofeat="DT">
+      <span>
+        <target id="w1"/>
+      </span>
+    </term>
+    <!--hotel-->
+    <term tid="t2" type="open" lemma="hotel" pos="N" morphofeat="NN">
+      <span>
+        <target id="w2"/>
+      </span>
+      <sentiment polarity="neutral" resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf"/>
+    </term>
+    <!--was-->
+    <term tid="t3" type="open" lemma="be" pos="V" morphofeat="VBD">
+      <span>
+        <target id="w3"/>
+      </span>
+    </term>
+    <!--awesome-->
+    <term tid="t4" type="open" lemma="awesome" pos="G" morphofeat="JJ">
+      <span>
+        <target id="w4"/>
+      </span>
+      <sentiment polarity="positive" resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf"/>
+    </term>
+    <!--!-->
+    <term tid="t5" type="close" lemma="!" pos="O" morphofeat=".">
+      <span>
+        <target id="w5"/>
+      </span>
+    </term>
+    <!--it-->
+    <term tid="t6" type="close" lemma="it" pos="Q" morphofeat="PRP">
+      <span>
+        <target id="w6"/>
+      </span>
+    </term>
+    <!--really-->
+    <term tid="t7" type="open" lemma="really" pos="A" morphofeat="RB">
+      <span>
+        <target id="w7"/>
+      </span>
+      <sentiment resource="Hotel domain lexicon for English . VUA_olery_lexicon_EN_lmf" sentiment_modifier="intensifier"/>
+    </term>
+    <!--was-->
+    <term tid="t8" type="open" lemma="be" pos="V" morphofeat="VBD">
+      <span>
+        <target id="w8"/>
+      </span>
+    </term>
+  </terms>
+</KAF>

@@ -1,12 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='UTF-8'?> 
 <KAF xml:lang="nl">
   <kafHeader>
     <linguisticProcessors layer="text">
       <lp timestamp="2013-05-06T10:46:10CEST" version="1.0" name="Open-nlp sentence splitter"/>
       <lp timestamp="2013-05-06T10:46:10CEST" version="1.0" name="Open-nlp tokenizer"/>
-    </linguisticProcessors>
-    <linguisticProcessors layer="opinions">
-      <lp timestamp="*" version="1.0" name="Basic opinion detector with Pos"/>
     </linguisticProcessors>
     <linguisticProcessor layer="terms">
       <lp timestamp="2013-05-06T10:46:12CEST" version="1.0" name="Basic_polarity_tagger_with_pos"/>
@@ -14,6 +11,9 @@
     <linguisticProcessor layer="term">
       <lp timestamp="2013-05-06T10:46:22CEST" version="1.0" name="Open nlp pos tagger"/>
     </linguisticProcessor>
+    <linguisticProcessors layer="opinions">
+      <lp version="13may2015-2.0" name="Basic opinion detector with Pos" timestamp="*"/>
+    </linguisticProcessors>
   </kafHeader>
   <text>
     <wf wid="w_1" sent="1">Dit</wf>

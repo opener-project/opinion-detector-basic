@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='UTF-8'?> 
 <KAF version="2.0" xml:lang="fr">
   <kafHeader>
     <linguisticProcessors layer="text">
@@ -22,7 +22,7 @@
       <lp name="Property manual annotations" version="1.0" timestamp="2014-04-08T16:29:19CEST"/>
     </linguisticProcessors>
     <linguisticProcessors layer="opinions">
-      <lp timestamp="*" version="1.0" name="Basic opinion detector with Pos"/>
+      <lp version="13may2015-2.0" name="Basic opinion detector with Pos" timestamp="*"/>
     </linguisticProcessors>
   </kafHeader>
   <text>

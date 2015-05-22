@@ -16,6 +16,7 @@ Feature: Using files as input and output
     | English  | input_with_mods2.en.kaf | output_with_mods2.en.kaf |
     | English  | input_with_mods3.en.kaf | output_with_mods3.en.kaf |
     | Dutch    | input.nl.kaf          | output.nl.kaf          |
+    | Dutch    | input2.nl.kaf          | output2.nl.kaf          |
     | German   | input.de.kaf          | output.de.kaf          |
     | French   | input.fr.kaf          | output.fr.kaf          |
 

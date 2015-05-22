@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<KAF xml:lang="nl" version="v1.opener">
+  <kafHeader>
+    <fileDesc />
+    <linguisticProcessors layer="text">
+      <lp name="opener-sentence-splitter-nl" timestamp="2015-02-14T12:16:04Z" version="0.0.1" />
+      <lp name="opener-tokenizer-nl" timestamp="2015-02-14T12:16:04Z" version="1.0.1" />
+    </linguisticProcessors>
+    <linguisticProcessors layer="terms">
+      <lp name="ehu-pos-nl" timestamp="2015-02-14T12:16:31+0000" version="1.0" />
+      <lp name="VUA polarity tagger multilanguage" timestamp="2015-02-14T12:16:32UTC" version="21may2014_1.2" />
+    </linguisticProcessors>
+    <linguisticProcessors layer="features">
+      <lp name="VUA property tagger" timestamp="2015-02-14T12:16:32UTC" version="16jan2015-2.0" />
+    </linguisticProcessors>
+    <linguisticProcessors layer="entities">
+      <lp name="ixa-pipe-nerc-nl-default" timestamp="2015-02-14T12:16:46+0000" version="1.1.0" />
+    </linguisticProcessors>
+  </kafHeader>
+  <text>
+    <wf wid="w1" sent="1" para="1" offset="0" length="11">Exceptional</wf>
+    <wf wid="w2" sent="2" para="2" offset="12" length="3">Wij</wf>
+    <wf wid="w3" sent="2" para="2" offset="16" length="6">hebben</wf>
+    <wf wid="w4" sent="2" para="2" offset="23" length="7">genoten</wf>
+    <wf wid="w5" sent="2" para="2" offset="31" length="3">van</wf>
+    <wf wid="w6" sent="2" para="2" offset="35" length="3">elk</wf>
+    <wf wid="w7" sent="2" para="2" offset="39" length="6">moment</wf>
+    <wf wid="w8" sent="2" para="2" offset="45" length="1">!</wf>
+    <wf wid="w9" sent="2" para="2" offset="46" length="9">Prachtige</wf>
+    <wf wid="w10" sent="2" para="2" offset="56" length="8">omgeving</wf>
+    <wf wid="w11" sent="2" para="2" offset="64" length="1">,</wf>
+    <wf wid="w12" sent="2" para="2" offset="66" length="5">lieve</wf>
+    <wf wid="w13" sent="2" para="2" offset="72" length="9">gastvrouw</wf>
+    <wf wid="w14" sent="2" para="2" offset="81" length="1">,</wf>
+    <wf wid="w15" sent="2" para="2" offset="83" length="5">mooie</wf>
+    <wf wid="w16" sent="2" para="2" offset="89" length="5">kamer</wf>
+    <wf wid="w17" sent="2" para="2" offset="94" length="1">,</wf>
+    <wf wid="w18" sent="2" para="2" offset="96" length="6">lekker</wf>
+    <wf wid="w19" sent="2" para="2" offset="103" length="9">avondmaal</wf>
+    <wf wid="w20" sent="2" para="2" offset="113" length="2">en</wf>
+    <wf wid="w21" sent="2" para="2" offset="116" length="8">heerlijk</wf>
+    <wf wid="w22" sent="2" para="2" offset="125" length="7">ontbijt</wf>
+    <wf wid="w23" sent="2" para="2" offset="132" length="3">...</wf>
+    <wf wid="w24" sent="2" para="2" offset="135" length="3">Ook</wf>
+    <wf wid="w25" sent="2" para="2" offset="139" length="4">onze</wf>
+    <wf wid="w26" sent="2" para="2" offset="144" length="5">jonge</wf>
+    <wf wid="w27" sent="2" para="2" offset="150" length="8">kinderen</wf>
+    <wf wid="w28" sent="2" para="2" offset="159" length="1">(</wf>
+    <wf wid="w29" sent="2" para="2" offset="160" length="5">bijna</wf>
+    <wf wid="w30" sent="2" para="2" offset="166" length="1">1</wf>
+    <wf wid="w31" sent="2" para="2" offset="168" length="2">en</wf>
+    <wf wid="w32" sent="2" para="2" offset="171" length="1">5</wf>
+    <wf wid="w33" sent="2" para="2" offset="172" length="1">)</wf>
+    <wf wid="w34" sent="2" para="2" offset="174" length="6">hadden</wf>
+    <wf wid="w35" sent="2" para="2" offset="181" length="3">net</wf>
+    <wf wid="w36" sent="2" para="2" offset="185" length="3">als</wf>
+    <wf wid="w37" sent="2" para="2" offset="189" length="3">ons</wf>
+    <wf wid="w38" sent="2" para="2" offset="193" length="4">zeer</wf>
+    <wf wid="w39" sent="2" para="2" offset="198" length="4">naar</wf>
+    <wf wid="w40" sent="2" para="2" offset="203" length="3">hun</wf>
+    <wf wid="w41" sent="2" para="2" offset="207" length="3">zin</wf>
+    <wf wid="w42" sent="2" para="2" offset="210" length="1">!</wf>
+    <wf wid="w43" sent="3" para="3" offset="212" length="8">Helemaal</wf>
+    <wf wid="w44" sent="3" para="3" offset="221" length="5">niets</wf>
+    <wf wid="w45" sent="3" para="3" offset="226" length="1">!</wf>
+  </text>
+  <terms>
+    <!--Exceptional-->
+    <term tid="t1" type="open" lemma="Exceptional" pos="N" morphofeat="N">
+      <span>
+        <target id="w1" />
+      </span>
+    </term>
+    <!--Wij-->
+    <term tid="t2" type="close" lemma="wij" pos="Q" morphofeat="Pron">
+      <span>
+        <target id="w2" />
+      </span>
+    </term>
+    <!--hebben-->
+    <term tid="t3" type="open" lemma="hebben" pos="V" morphofeat="V">
+      <span>
+        <target id="w3" />
+      </span>
+    </term>
+    <!--genoten-->
+    <term tid="t4" type="open" lemma="genoten" pos="V" morphofeat="V">
+      <span>
+        <target id="w4" />
+      </span>
+    </term>
+    <!--van-->
+    <term tid="t5" type="close" lemma="van" pos="P" morphofeat="Prep">
+      <span>
+        <target id="w5" />
+      </span>
+    </term>
+    <!--elk-->
+    <term tid="t6" type="close" lemma="elk" pos="Q" morphofeat="Pron">
+      <span>
+        <target id="w6" />
+      </span>
+    </term>
+    <!--moment-->
+    <term tid="t7" type="open" lemma="moment" pos="N" morphofeat="N">
+      <span>
+        <target id="w7" />
+      </span>
+    </term>
+    <!--!-->
+    <term tid="t8" type="close" lemma="!" pos="O" morphofeat="Punc">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" sentiment_modifier="intensifier" />
+      <span>
+        <target id="w8" />
+      </span>
+    </term>
+    <!--Prachtige-->
+    <term tid="t9" type="open" lemma="prachtige" pos="G" morphofeat="Adj">
+      <span>
+        <target id="w9" />
+      </span>
+    </term>
+    <!--omgeving-->
+    <term tid="t10" type="open" lemma="omgeving" pos="N" morphofeat="N">
+      <span>
+        <target id="w10" />
+      </span>
+    </term>
+    <!--,-->
+    <term tid="t11" type="close" lemma="," pos="O" morphofeat="Punc">
+      <span>
+        <target id="w11" />
+      </span>
+    </term>
+    <!--lieve-->
+    <term tid="t12" type="open" lemma="lieve" pos="G" morphofeat="Adj">
+      <span>
+        <target id="w12" />
+      </span>
+    </term>
+    <!--gastvrouw-->
+    <term tid="t13" type="open" lemma="gastvrouw" pos="N" morphofeat="N">
+      <span>
+        <target id="w13" />
+      </span>
+    </term>
+    <!--,-->
+    <term tid="t14" type="close" lemma="," pos="O" morphofeat="Punc">
+      <span>
+        <target id="w14" />
+      </span>
+    </term>
+    <!--mooie-->
+    <term tid="t15" type="open" lemma="mooie" pos="G" morphofeat="Adj">
+      <span>
+        <target id="w15" />
+      </span>
+    </term>
+    <!--kamer-->
+    <term tid="t16" type="open" lemma="kamer" pos="N" morphofeat="N">
+      <span>
+        <target id="w16" />
+      </span>
+    </term>
+    <!--,-->
+    <term tid="t17" type="close" lemma="," pos="O" morphofeat="Punc">
+      <span>
+        <target id="w17" />
+      </span>
+    </term>
+    <!--lekker-->
+    <term tid="t18" type="open" lemma="lekker" pos="G" morphofeat="Adj">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" polarity="positive" />
+      <span>
+        <target id="w18" />
+      </span>
+    </term>
+    <!--avondmaal-->
+    <term tid="t19" type="open" lemma="avondmaal" pos="N" morphofeat="N">
+      <span>
+        <target id="w19" />
+      </span>
+    </term>
+    <!--en-->
+    <term tid="t20" type="close" lemma="en" pos="C" morphofeat="Conj">
+      <span>
+        <target id="w20" />
+      </span>
+    </term>
+    <!--heerlijk-->
+    <term tid="t21" type="open" lemma="heerlijk" pos="G" morphofeat="Adj">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" polarity="positive" />
+      <span>
+        <target id="w21" />
+      </span>
+    </term>
+    <!--ontbijt-->
+    <term tid="t22" type="open" lemma="ontbijt" pos="N" morphofeat="N">
+      <span>
+        <target id="w22" />
+      </span>
+    </term>
+    <!--...-->
+    <term tid="t23" type="close" lemma="..." pos="O" morphofeat="Punc">
+      <span>
+        <target id="w23" />
+      </span>
+    </term>
+    <!--Ook-->
+    <term tid="t24" type="open" lemma="ook" pos="A" morphofeat="Adv">
+      <span>
+        <target id="w24" />
+      </span>
+    </term>
+    <!--onze-->
+    <term tid="t25" type="close" lemma="onze" pos="Q" morphofeat="Pron">
+      <span>
+        <target id="w25" />
+      </span>
+    </term>
+    <!--jonge-->
+    <term tid="t26" type="open" lemma="jonge" pos="G" morphofeat="Adj">
+      <span>
+        <target id="w26" />
+      </span>
+    </term>
+    <!--kinderen-->
+    <term tid="t27" type="open" lemma="kinderen" pos="N" morphofeat="N">
+      <span>
+        <target id="w27" />
+      </span>
+    </term>
+    <!--(-->
+    <term tid="t28" type="close" lemma="(" pos="O" morphofeat="Punc">
+      <span>
+        <target id="w28" />
+      </span>
+    </term>
+    <!--bijna-->
+    <term tid="t29" type="open" lemma="bijna" pos="A" morphofeat="Adv">
+      <span>
+        <target id="w29" />
+      </span>
+    </term>
+    <!--1-->
+    <term tid="t30" type="open" lemma="1" pos="N" morphofeat="Num">
+      <span>
+        <target id="w30" />
+      </span>
+    </term>
+    <!--en-->
+    <term tid="t31" type="close" lemma="en" pos="C" morphofeat="Conj">
+      <span>
+        <target id="w31" />
+      </span>
+    </term>
+    <!--5-->
+    <term tid="t32" type="open" lemma="5" pos="N" morphofeat="Num">
+      <span>
+        <target id="w32" />
+      </span>
+    </term>
+    <!--)-->
+    <term tid="t33" type="close" lemma=")" pos="O" morphofeat="Punc">
+      <span>
+        <target id="w33" />
+      </span>
+    </term>
+    <!--hadden-->
+    <term tid="t34" type="open" lemma="hadden" pos="V" morphofeat="V">
+      <span>
+        <target id="w34" />
+      </span>
+    </term>
+    <!--net-->
+    <term tid="t35" type="open" lemma="net" pos="A" morphofeat="Adv">
+      <span>
+        <target id="w35" />
+      </span>
+    </term>
+    <!--als-->
+    <term tid="t36" type="close" lemma="als" pos="C" morphofeat="Conj">
+      <span>
+        <target id="w36" />
+      </span>
+    </term>
+    <!--ons-->
+    <term tid="t37" type="close" lemma="ons" pos="Q" morphofeat="Pron">
+      <span>
+        <target id="w37" />
+      </span>
+    </term>
+    <!--zeer-->
+    <term tid="t38" type="open" lemma="zeer" pos="A" morphofeat="Adv">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" sentiment_modifier="intensifier" />
+      <span>
+        <target id="w38" />
+      </span>
+    </term>
+    <!--naar-->
+    <term tid="t39" type="close" lemma="naar" pos="P" morphofeat="Prep">
+      <span>
+        <target id="w39" />
+      </span>
+    </term>
+    <!--hun-->
+    <term tid="t40" type="close" lemma="hun" pos="Q" morphofeat="Pron">
+      <span>
+        <target id="w40" />
+      </span>
+    </term>
+    <!--zin-->
+    <term tid="t41" type="open" lemma="zin" pos="N" morphofeat="N">
+      <span>
+        <target id="w41" />
+      </span>
+    </term>
+    <!--!-->
+    <term tid="t42" type="close" lemma="!" pos="O" morphofeat="Punc">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" sentiment_modifier="intensifier" />
+      <span>
+        <target id="w42" />
+      </span>
+    </term>
+    <!--Helemaal-->
+    <term tid="t43" type="open" lemma="helemaal" pos="A" morphofeat="Adv">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" sentiment_modifier="intensifier" />
+      <span>
+        <target id="w43" />
+      </span>
+    </term>
+    <!--niets-->
+    <term tid="t44" type="close" lemma="niets" pos="Q" morphofeat="Pron">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" sentiment_modifier="shifter" />
+      <span>
+        <target id="w44" />
+      </span>
+    </term>
+    <!--!-->
+    <term tid="t45" type="close" lemma="!" pos="O" morphofeat="Punc">
+      <sentiment resource="Hotel domain lexicon for Dutch . VUA_olery_lexicon_nl_lmf" sentiment_modifier="intensifier" />
+      <span>
+        <target id="w45" />
+      </span>
+    </term>
+  </terms>
+  <entities>
+    <entity eid="e1" type="MISC">
+      <references>
+        <!--Exceptional-->
+        <span>
+          <target id="t1" />
+        </span>
+      </references>
+    </entity>
+  </entities>
+  <features>
+    <properties>
+      <property pid="p1" lemma="cleanliness">
+        <references>
+          <!--net-->
+          <span>
+            <target id="t35" />
+          </span>
+        </references>
+      </property>
+      <property pid="p2" lemma="location">
+        <references>
+          <!--omgeving-->
+          <span>
+            <target id="t10" />
+          </span>
+        </references>
+      </property>
+      <property pid="p3" lemma="restaurant">
+        <references>
+          <!--lekker-->
+          <span>
+            <target id="t18" />
+          </span>
+          <!--avondmaal-->
+          <span>
+            <target id="t19" />
+          </span>
+          <!--ontbijt-->
+          <span>
+            <target id="t22" />
+          </span>
+        </references>
+      </property>
+      <property pid="p4" lemma="room">
+        <references>
+          <!--kamer-->
+          <span>
+            <target id="t16" />
+          </span>
+        </references>
+      </property>
+    </properties>
+  </features>
+</KAF>

@@ -1,4 +1,4 @@
 desc 'Runs the tests'
-task :test => :compile do
+task :test do
   sh('cucumber features')
 end

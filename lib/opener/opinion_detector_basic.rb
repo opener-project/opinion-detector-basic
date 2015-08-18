@@ -1,6 +1,5 @@
 require 'slop'
 require 'oga'
-require 'monitor'
 
 require 'rexml/document'
 require 'rexml/formatters/pretty'
@@ -32,7 +31,7 @@ module Opener
       @args    = options.delete(:args) || []
       @options = options
     end
-    
+
     ##
     # Processes the input KAF document.
     #

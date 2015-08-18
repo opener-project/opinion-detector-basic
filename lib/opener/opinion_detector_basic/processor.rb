@@ -17,11 +17,11 @@ module Opener
       #  by default due to the performance overhead.
       #
       def initialize(file, options = {})
-        @document            = Oga.parse_xml(file)
+        @document = Oga.parse_xml(file)
 
-        @timestamp           = !!options[:timestamp]
-        @opinion_strength    = !!options[:opinion_strength]
-        @pretty              = options[:pretty] || false
+        @timestamp        = !!options[:timestamp]
+        @opinion_strength = !!options[:opinion_strength]
+        @pretty           = options[:pretty] || false
 
         raise 'Error parsing input. Input is required to be KAF' unless is_kaf?
       end
@@ -30,18 +30,18 @@ module Opener
       # Processes the input and returns the new KAF output.
       # @return [String]
       #
-      def process        
+      def process
         add_opinions_layer
-        
+
         index = 1
-        opinions.each do |opinion|          
+        opinions.each do |opinion|
           add_opinion(opinion, index)
           index += 1
         end
 
         add_linguistic_processor
 
-        return pretty ? pretty_print(document) : document.to_xml
+        pretty ? pretty_print(document) : document.to_xml
       end
 
       ##
@@ -50,25 +50,19 @@ module Opener
       # @return [String]
       #
       def language
-        return @language ||= document.at_xpath('KAF').get('xml:lang')
+        @language ||= document.at_xpath('KAF').get('xml:lang')
       end
-      
+
       ##
       # Get the terms from the input file
       # @return [Hash]
       #
       def terms
-        unless @terms
-          @terms = []
-          
-          document.xpath('KAF/terms/term').each do |term|
-            @terms << Term.new(term, document, language)
-          end
+        @terms ||= document.xpath('KAF/terms/term').map do |term|
+          Term.new(term, document, language)
         end
-        
-        return @terms
       end
-      
+
       ##
       # Get the opinions.
       #
@@ -79,7 +73,7 @@ module Opener
           set_accumulated_strength
           apply_modifiers
           apply_conjunctions
-          
+
           ##
           # Initialize opinions with their expressions.
           #
@@ -88,14 +82,14 @@ module Opener
               o = Opinion.new(term)
             end
           end.compact
-          
+
           ##
           # Obtain targets for each opinion.
           #
           @opinions.each do |opinion|
             opinion.obtain_targets(sentences)
           end
-          
+
           ##
           # Obtain holders for each opinion.
           #
@@ -103,10 +97,10 @@ module Opener
             opinion.obtain_holders(sentences, language)
           end
         end
-        
-        return @opinions
+
+        @opinions
       end
-      
+
       ##
       # Remove the opinions layer from the KAF file if it exists and add a new
       # one.
@@ -117,30 +111,32 @@ module Opener
 
         new_node('opinions', 'KAF')
       end
-      
+
       ##
       # Adds the entire opinion in the KAF file.
       #
       def add_opinion(opinion, index)
         opinion_node = new_node("opinion", "KAF/opinions")
         opinion_node.set('oid', "o#{index.to_s}")
-        
+
         unless opinion.holders.empty?
           opinion_holder_node = new_node("opinion_holder", opinion_node)
           add_opinion_element(opinion_holder_node, opinion.holders)
         end
-        
+
         opinion_target_node = new_node("opinion_target", opinion_node)
+
         unless opinion.target_ids.empty?
           add_opinion_element(opinion_target_node, opinion.target_ids)
         end
-        
+
         expression_node = new_node("opinion_expression", opinion_node)
         expression_node.set('polarity', opinion.polarity)
         expression_node.set('strength', opinion.strength.to_s)
+
         add_opinion_element(expression_node, opinion.ids)
       end
-      
+
       ##
       # Method for adding opinion holders, targets and expressions.
       #
@@ -149,12 +145,13 @@ module Opener
         comment = Oga::XML::Comment.new(:text => "#{lemmas}")
         node.children << comment
         span_node = new_node("span", node)
+
         ids.each do |id|
           target_node = new_node("target", span_node)
           target_node.set('id', id.to_s)
         end
       end
-      
+
       ##
       # Add linguistic processor layer with basic information
       # (version, timestamp, description etc) in the KAF file.
@@ -171,7 +168,7 @@ module Opener
 
         lp_node.set('version', "#{last_edited}-#{version}")
         lp_node.set('name', description)
-        
+
         if timestamp
           format = '%Y-%m-%dT%H:%M:%S%Z'
 
@@ -180,7 +177,7 @@ module Opener
           lp_node.set('timestamp', '*')
         end
       end
-      
+
       ##
       # Format the output document properly.
       #
@@ -196,18 +193,18 @@ module Opener
         formatter.compact = true
         formatter.write(doc, out)
 
-        return out.strip
+        out.strip
       end
-      
+
       ##
       # Get terms grouped by sentence.
       #
       def sentences
         @sentences ||= terms.group_by{|t| t.sentence}
       end
-      
+
       protected
-      
+
       ##
       # The strength of a term depends heavily on the type of the previous
       # one. For example if the previous one is a shifter, it needs
@@ -228,7 +225,7 @@ module Opener
                 symbol = terms[i+1].accumulated_strength > 0 ? :+ : :-
               else
                 symbol = :*
-              end          
+              end
             elsif terms[i+1].is_intensifier?
               terms[i+1].accumulated_strength = term.accumulated_strength.send(symbol, terms[i+1].accumulated_strength)
               term.use = false
@@ -242,7 +239,7 @@ module Opener
           end
         end
       end
-      
+
       ##
       # Apply strength to the next term after a shifter or intensifier.
       #
@@ -258,7 +255,7 @@ module Opener
           end
         end
       end
-      
+
       ##
       # Ignore conjunctions when applying strength.
       #
@@ -276,7 +273,7 @@ module Opener
               if j >= terms_count
                 break
               end
-              
+
               if terms[j].is_conjunction
                 terms[j].use = false
                 j += 1
@@ -297,9 +294,9 @@ module Opener
             i = j
           end
           i += 1
-        end    
+        end
       end
-      
+
       ##
       # Creates a new node in the KAF file.
       #
@@ -314,7 +311,7 @@ module Opener
 
         parent_node.children << node
 
-        return node
+        node
       end
 
       ##
@@ -322,7 +319,7 @@ module Opener
       # @return [Boolean]
       #
       def is_kaf?
-        return !!document.at_xpath('KAF')
+        !!document.at_xpath('KAF')
       end
     end # Processor
   end # OpinionDetectorBasic

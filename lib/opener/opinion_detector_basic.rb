@@ -1,3 +1,5 @@
+gem 'slop', '~> 3.0'
+
 require 'slop'
 require 'oga'
 

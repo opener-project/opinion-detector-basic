@@ -162,7 +162,7 @@
       </span>
     </term>
     <!--acertada.-->
-    <term tid="t10" type="close" lemma="acertada." pos="O" morphofeat="''">
+    <term tid="t10" type="close" lemma="acertada." pos="O" morphofeat="&apos;&apos;">
       <span>
         <target id="w10"/>
       </span>

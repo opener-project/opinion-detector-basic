@@ -634,7 +634,7 @@
         <target id="w92"/>
       </span>
     </term>
-    <term lemma="qualita'" morphofeat="NOU~CANI" pos="N" tid="t93" type="">
+    <term lemma="qualita&apos;" morphofeat="NOU~CANI" pos="N" tid="t93" type="">
       <span>
         <target id="w93"/>
       </span>
@@ -670,7 +670,7 @@
         <target id="w99"/>
       </span>
     </term>
-    <term lemma="c'" morphofeat="ADVB" pos="A" tid="t100" type="">
+    <term lemma="c&apos;" morphofeat="ADVB" pos="A" tid="t100" type="">
       <span>
         <target id="w100"/>
       </span>
@@ -2376,7 +2376,12 @@
       </opinion_expression>
     </opinion>
     <opinion oid="o8">
-      <opinion_target/>
+      <opinion_target>
+        <!--servizio-->
+        <span>
+          <target id="t60"/>
+        </span>
+      </opinion_target>
       <opinion_expression polarity="positive" strength="1">
         <!--bello-->
         <span>
@@ -2395,9 +2400,9 @@
     </opinion>
     <opinion oid="o10">
       <opinion_target>
-        <!--reception-->
+        <!--depliants-->
         <span>
-          <target id="t64"/>
+          <target id="t72"/>
         </span>
       </opinion_target>
       <opinion_expression polarity="positive" strength="1">

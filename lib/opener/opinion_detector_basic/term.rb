@@ -3,7 +3,17 @@ module Opener
     class Term
       attr_reader :node, :sentence, :is_conjunction
       attr_accessor :use, :accumulated_strength, :list_ids
-      
+
+      # Map of conjunctions per language code
+      CONJUNCTIONS = {
+        'nl' => %w{, en},
+        'en' => %w{, and},
+        'es' => %w{, y e},
+        'it' => %w{, e ed},
+        'de' => %w{, und},
+        'fr' => %w{, et}
+      }
+
       def initialize(node, document, language)
         @node                 = node
         @sentence             = get_sentence(document)
@@ -12,7 +22,7 @@ module Opener
         @list_ids             = [id]
         @is_conjunction       = is_conjunction?(language)
       end
-      
+
       ##
       # Returns the term id.
       #
@@ -21,16 +31,16 @@ module Opener
       def id
         @id ||= node.get('tid')
       end
-      
+
       ##
       # Returns the lemma of the term.
-      # 
+      #
       # @return [String]
       #
       def lemma
         @lemma ||= node.get('lemma')
       end
-      
+
       ##
       # Returns the part of speech of the term.
       #
@@ -39,38 +49,36 @@ module Opener
       def pos
         @pos ||= node.get('pos')
       end
-      
+
       ##
       # Returns the sentiment modifier type if it exists.
       #
       # @return [String|NilClass]
       #
       def sentiment_modifier
-        @sentiment_modifier ||= if sentiment = node.xpath('sentiment').first
-          sentiment.get('sentiment_modifier')
-        end
+        @sentiment_modifier ||=
+          first_sentiment ? first_sentiment.get('sentiment_modifier') : nil
       end
-      
+
       ##
       # Returns the polarity of the term if it exists.
       #
       # @return [String|NilClass]
       #
       def polarity
-        @polarity ||= if sentiment = node.xpath('sentiment').first
-          sentiment.get('polarity')
-        end
+        @polarity ||= first_sentiment ? first_sentiment.get('polarity') : nil
       end
-      
+
       ##
       # Returns the actual word ids that construct the lemma.
       #
       # @return [Array]
       #
       def target_ids
-        @target_ids ||= node.xpath('span/target').map {|target| target.get('id')}
+        @target_ids ||= node.xpath('span/target')
+          .map { |target| target.get('id') }
       end
-      
+
       ##
       # Returns the strength of the term depending on its type.
       #
@@ -82,16 +90,16 @@ module Opener
         elsif polarity == "negative"
           return -1
         end
-        
+
         if is_intensifier?
           return 2
         elsif is_shifter?
           return -1
         end
-        
+
         return 0
       end
-      
+
       ##
       # Returns the sentence id that the term belongs to in the document.
       #
@@ -103,7 +111,7 @@ module Opener
         .first
         .get('sent')
       end
-      
+
       ##
       # Checks if a term is an intensifier.
       #
@@ -112,7 +120,7 @@ module Opener
       def is_intensifier?
         sentiment_modifier == "intensifier"
       end
-      
+
       ##
       # Checks if a term is a shifter.
       #
@@ -121,7 +129,7 @@ module Opener
       def is_shifter?
         sentiment_modifier == "shifter"
       end
-      
+
       ##
       # Checks if a term is an expression.
       #
@@ -130,30 +138,21 @@ module Opener
       def is_expression?
         use && !!polarity
       end
-      
+
       ##
       # Checks if a term is a conjunction.
       #
       # @return [TrueClass|FalseClass]
       #
       def is_conjunction?(language)
-        conjunctions[language].include?(lemma)
+        CONJUNCTIONS[language].include?(lemma)
       end
-      
-      ##
-      # Map of conjunctions per language code
-      #
-      # @return [Hash]
-      #
-      def conjunctions
-        {
-          'nl' => [',','en'],
-          'en' => [',','and'],
-          'es' => [',','y','e'],
-          'it' => [',','e','ed'],
-          'de' => [',','und'],
-          'fr' => [',','et']         
-        }
+
+      private
+
+      # @return [Oga::XML::Element]
+      def first_sentiment
+        @first_sentiment ||= node.xpath('sentiment').first
       end
     end # Term
   end # OpinionDetectorBasic

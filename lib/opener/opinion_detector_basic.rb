@@ -41,8 +41,6 @@ module Opener
     # @return [String]
     #
     def run(input)
-      options[:timestamp] = !options.delete(:no_time)
-
       return Processor.new(input, options).process
     end
   end # OpinionDetectorBasic

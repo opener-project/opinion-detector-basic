@@ -19,8 +19,8 @@ module Opener
       def initialize(file, options = {})
         @document = Oga.parse_xml(file)
 
-        @timestamp        = !!options[:timestamp]
-        @opinion_strength = !!options[:opinion_strength]
+        @timestamp        = options[:timestamp]
+        @opinion_strength = options[:opinion_strength]
         @pretty           = options[:pretty] || false
 
         raise 'Error parsing input. Input is required to be KAF' unless is_kaf?

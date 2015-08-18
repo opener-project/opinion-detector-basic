@@ -45,10 +45,17 @@ Example:
             abort "opinion-detector-basic v#{VERSION} on #{RUBY_DESCRIPTION}"
           end
 
+          on :p, :pretty, 'Enables pretty-printing of XML',
+            :default => false
+
+          on :'no-timestamp', 'Disables timestamps in XML output'
+
           run do |opts, args|
             detector = OpinionDetectorBasic.new(
-              :args   => args,
-              :domain => opts[:domain]
+              :args      => args,
+              :domain    => opts[:domain],
+              :pretty    => opts[:pretty],
+              :timestamp => !opts[:'no-timestamp']
             )
 
             input = STDIN.tty? ? nil : STDIN.read

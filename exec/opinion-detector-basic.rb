@@ -20,12 +20,11 @@ Oga::XPath::Parser.class_eval do
   end
 end
 
-Oga::XPath::Evaluator.class_eval do
+Oga::XPath::Compiler.class_eval do
   include NewRelic::Agent::Instrumentation::ControllerInstrumentation
   include NewRelic::Agent::MethodTracer
 
-  add_method_tracer(:evaluate)
-  add_method_tracer(:evaluate_ast)
+  add_method_tracer(:compile)
 end
 
 Opener::OpinionDetectorBasic::Processor.class_eval do

@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.license     = 'Apache 2.0'
 
   gem.required_ruby_version = '>= 1.9.2'
-  
+
   gem.files = Dir.glob([
     'lib/**/*',
     'config.ru',
@@ -26,8 +26,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'opener-daemons', '~> 2.2'
   gem.add_dependency 'opener-webservice', '~> 2.1'
   gem.add_dependency 'opener-core', '~> 2.2'
-  
-  gem.add_dependency 'oga'
+
+  gem.add_dependency 'oga', '~> 1.3.0'
 
   gem.add_development_dependency 'rspec', '~> 3.0'
   gem.add_development_dependency 'cucumber'

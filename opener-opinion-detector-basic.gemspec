@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'opener-webservice', '~> 2.1'
   gem.add_dependency 'opener-core', '~> 2.2'
 
-  gem.add_dependency 'oga', '~> 1.3.0'
+  gem.add_dependency 'oga', ['~> 1.0', '>= 1.3.1']
 
   gem.add_development_dependency 'rspec', '~> 3.0'
   gem.add_development_dependency 'cucumber'

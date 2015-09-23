@@ -41,6 +41,22 @@ Opener::OpinionDetectorBasic::Processor.class_eval do
   add_method_tracer(:apply_conjunctions)
 end
 
+Opener::OpinionDetectorBasic::Term.class_eval do
+  include NewRelic::Agent::Instrumentation::ControllerInstrumentation
+  include NewRelic::Agent::MethodTracer
+
+  add_method_tracer(:initialize)
+  add_method_tracer(:sentiment_modifier)
+  add_method_tracer(:polarity)
+  add_method_tracer(:target_ids)
+  add_method_tracer(:strength)
+  add_method_tracer(:get_sentence)
+  add_method_tracer(:is_intensifier?)
+  add_method_tracer(:is_shifter?)
+  add_method_tracer(:is_expression?)
+  add_method_tracer(:is_conjunction?)
+end
+
 daemon = Opener::Daemons::Daemon.new(Opener::OpinionDetectorBasic)
 
 daemon.start

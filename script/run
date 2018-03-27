@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require_relative '../lib/opener/opinion_detector_basic'
+require 'opener/daemons'
+
+#input = STDIN.read
+
+input = JSON.parse STDIN.read
+input = Zlib.gunzip Base64.decode64 input['input']
+
+process = Opener::OpinionDetectorBasic.new
+
+puts process.run input
+

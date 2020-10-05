@@ -40,10 +40,11 @@ module Opener
     # @param [String] input
     # @return [String]
     #
-    def run(input)
+    def run input, params = {}
       return Processor.new(input, options).process
     end
-  end # OpinionDetectorBasic
-end # Opener
+
+  end
+end
 
 

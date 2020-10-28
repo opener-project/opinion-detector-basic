@@ -145,7 +145,7 @@ module Opener
       # @return [TrueClass|FalseClass]
       #
       def is_conjunction?(language)
-        CONJUNCTIONS[language].include?(lemma)
+        pos == 'J' || CONJUNCTIONS[language]&.include?(lemma)
       end
 
       private

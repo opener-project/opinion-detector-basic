@@ -76,7 +76,7 @@ module Opener
       def obtain_holders(sentences, language)
         sentence_terms = sentences[sentence]
         sentence_terms.each do |term|
-          if OPINION_HOLDERS[language].include?(term.lemma)
+          if OPINION_HOLDERS[language]&.include?(term.lemma)
             @holders << term.id
             break
           end

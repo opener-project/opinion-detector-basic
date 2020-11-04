@@ -79,7 +79,7 @@ module Opener
           #
           @opinions = terms.map do |term|
             if term.is_expression? && term.accumulated_strength != 0
-              o = Opinion.new(term)
+              Opinion.new(term)
             end
           end.compact
 

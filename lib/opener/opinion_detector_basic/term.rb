@@ -29,7 +29,7 @@ module Opener
       # @return [String]
       #
       def id
-        @id ||= node.get('tid')
+        @id ||= node.attr('tid')
       end
 
       ##
@@ -38,7 +38,7 @@ module Opener
       # @return [String]
       #
       def lemma
-        @lemma ||= node.get('lemma')
+        @lemma ||= node.attr('lemma')
       end
 
       ##
@@ -47,7 +47,7 @@ module Opener
       # @return [String]
       #
       def pos
-        @pos ||= node.get('pos')
+        @pos ||= node.attr('pos')
       end
 
       ##
@@ -57,7 +57,7 @@ module Opener
       #
       def sentiment_modifier
         @sentiment_modifier ||=
-          first_sentiment ? first_sentiment.get('sentiment_modifier') : nil
+          first_sentiment ? first_sentiment.attr('sentiment_modifier') : nil
       end
 
       ##
@@ -66,7 +66,7 @@ module Opener
       # @return [String|NilClass]
       #
       def polarity
-        @polarity ||= first_sentiment ? first_sentiment.get('polarity') : nil
+        @polarity ||= first_sentiment ? first_sentiment.attr('polarity') : nil
       end
 
       ##
@@ -76,7 +76,7 @@ module Opener
       #
       def target_ids
         @target_ids ||= node.xpath('span/target')
-          .map { |target| target.get('id') }
+          .map { |target| target.attr('id') }
       end
 
       ##
@@ -109,7 +109,7 @@ module Opener
         document
         .xpath("KAF/text/wf[@wid='#{target_ids.first}']")
         .first
-        .get('sent')
+        .attr('sent')
       end
 
       ##

@@ -17,7 +17,7 @@ module Opener
       #  by default due to the performance overhead.
       #
       def initialize(file, options = {})
-        @document = Oga.parse_xml(file)
+        @document = Nokogiri.XML file
 
         @timestamp        = options[:timestamp]
         @opinion_strength = options[:opinion_strength]
@@ -44,30 +44,16 @@ module Opener
         pretty ? pretty_print(document) : document.to_xml
       end
 
-      ##
-      # Get the language of the input file.
-      #
-      # @return [String]
-      #
       def language
-        @language ||= document.at_xpath('KAF').get('xml:lang')
+        @language ||= document.at_xpath('KAF').attr('xml:lang')
       end
 
-      ##
-      # Get the terms from the input file
-      # @return [Hash]
-      #
       def terms
         @terms ||= document.xpath('KAF/terms/term').map do |term|
           Term.new(term, document, language)
         end
       end
 
-      ##
-      # Get the opinions.
-      #
-      # @return [Hash]
-      #
       def opinions
         unless @opinions
           set_accumulated_strength
@@ -117,7 +103,7 @@ module Opener
       #
       def add_opinion(opinion, index)
         opinion_node = new_node("opinion", "KAF/opinions")
-        opinion_node.set('oid', "o#{index.to_s}")
+        opinion_node['oid'] = "o#{index.to_s}"
 
         unless opinion.holders.empty?
           opinion_holder_node = new_node("opinion_holder", opinion_node)
@@ -131,8 +117,8 @@ module Opener
         end
 
         expression_node = new_node("opinion_expression", opinion_node)
-        expression_node.set('polarity', opinion.polarity)
-        expression_node.set('strength', opinion.strength.to_s)
+        expression_node['polarity'] = opinion.polarity
+        expression_node['strength'] = opinion.strength.to_s
 
         add_opinion_element(expression_node, opinion.ids)
       end
@@ -141,14 +127,15 @@ module Opener
       # Method for adding opinion holders, targets and expressions.
       #
       def add_opinion_element(node, ids)
-        lemmas = terms.select{|t| ids.include?(t.id)}.map(&:lemma).join(" ")
-        comment = Oga::XML::Comment.new(:text => "#{lemmas}")
-        node.children << comment
+        lemmas    = terms.select{|t| ids.include?(t.id)}.map(&:lemma).join(" ")
+        comment   = Nokogiri::XML::Comment.new(document, "#{lemmas}")
+        node.add_child comment
+
         span_node = new_node("span", node)
 
         ids.each do |id|
-          target_node = new_node("target", span_node)
-          target_node.set('id', id.to_s)
+          target_node       = new_node("target", span_node)
+          target_node['id'] = id.to_s
         end
       end
 
@@ -162,19 +149,19 @@ module Opener
         version     = '2.0'
 
         node = new_node('linguisticProcessors', 'KAF/kafHeader')
-        node.set('layer', 'opinions')
+        node['layer'] = 'opinions'
 
         lp_node = new_node('lp', node)
 
-        lp_node.set('version', "#{last_edited}-#{version}")
-        lp_node.set('name', description)
+        lp_node['version'] = "#{last_edited}-#{version}"
+        lp_node['name'] = description
 
         if timestamp
           format = '%Y-%m-%dT%H:%M:%S%Z'
 
-          lp_node.set('timestamp', Time.now.strftime(format))
+          lp_node['timestamp'] = Time.now.strftime(format)
         else
-          lp_node.set('timestamp', '*')
+          lp_node['timestamp'] = '*'
         end
       end
 
@@ -307,9 +294,9 @@ module Opener
           parent_node = parent
         end
 
-        node = Oga::XML::Element.new(:name => tag)
+        node = Nokogiri::XML::Element.new(tag, document)
 
-        parent_node.children << node
+        parent_node.add_child node
 
         node
       end
@@ -321,6 +308,6 @@ module Opener
       def is_kaf?
         !!document.at_xpath('KAF')
       end
-    end # Processor
-  end # OpinionDetectorBasic
-end # Opener
+    end
+  end
+end

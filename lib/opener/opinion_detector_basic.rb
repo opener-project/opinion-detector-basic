@@ -1,7 +1,7 @@
 gem 'slop', '~> 3.0'
 
 require 'slop'
-require 'oga'
+require 'nokogiri'
 
 require 'rexml/document'
 require 'rexml/formatters/pretty'

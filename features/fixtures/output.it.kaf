@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?> 
+<?xml version='1.0' encoding='UTF-8'?>
 <KAF version="2.0" xml:lang="it">
   <kafHeader>
     <linguisticProcessors layer="text">
@@ -634,7 +634,7 @@
         <target id="w92"/>
       </span>
     </term>
-    <term lemma="qualita&apos;" morphofeat="NOU~CANI" pos="N" tid="t93" type="">
+    <term lemma="qualita'" morphofeat="NOU~CANI" pos="N" tid="t93" type="">
       <span>
         <target id="w93"/>
       </span>
@@ -670,7 +670,7 @@
         <target id="w99"/>
       </span>
     </term>
-    <term lemma="c&apos;" morphofeat="ADVB" pos="A" tid="t100" type="">
+    <term lemma="c'" morphofeat="ADVB" pos="A" tid="t100" type="">
       <span>
         <target id="w100"/>
       </span>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?> 
+<?xml version='1.0' encoding='UTF-8'?>
 <KAF version="2.0" xml:lang="fr">
   <kafHeader>
     <linguisticProcessors layer="text">
@@ -175,7 +175,7 @@
         <target id="w6"/>
       </span>
     </term>
-    <term lemma="d&apos;" morphofeat="P" pos="P" tid="t7" type="close">
+    <term lemma="d'" morphofeat="P" pos="P" tid="t7" type="close">
       <span>
         <target id="w7"/>
       </span>
@@ -222,7 +222,7 @@
         <target id="w15"/>
       </span>
     </term>
-    <term lemma="d&apos;" morphofeat="P" pos="P" tid="t16" type="close">
+    <term lemma="d'" morphofeat="P" pos="P" tid="t16" type="close">
       <span>
         <target id="w16"/>
       </span>
@@ -426,7 +426,7 @@
       </span>
       <sentiment polarity="neutral" resource="Vicomtech_general_lexicon_french"/>
     </term>
-    <term lemma="n&apos;" morphofeat="ADV" pos="G" tid="t56" type="open">
+    <term lemma="n'" morphofeat="ADV" pos="G" tid="t56" type="open">
       <span>
         <target id="w56"/>
       </span>
@@ -517,7 +517,7 @@
         <target id="w73"/>
       </span>
     </term>
-    <term lemma="s&apos;" morphofeat="CLR3ms" pos="Q" tid="t74" type="close">
+    <term lemma="s'" morphofeat="CLR3ms" pos="Q" tid="t74" type="close">
       <span>
         <target id="w74"/>
       </span>

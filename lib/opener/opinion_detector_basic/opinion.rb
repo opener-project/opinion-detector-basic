@@ -21,11 +21,9 @@ module Opener
 
       def initialize(term)
         @term = term
-
-        @left_candidates  = []
+        @left_candidates = []
         @right_candidates = []
-
-        @holders    = []
+        @holders = []
         @target_ids = []
       end
 
@@ -165,9 +163,8 @@ module Opener
       # @return [Hash]
       #
       def filter_candidates(sentence_terms)
-        sentence_terms.select{ |t| !ids.include? t.id }
+        sentence_terms.select{|t| (t.pos == "N" || t.pos == "R") && !ids.include?(t.id)}
       end
-
-    end
-  end
-end
+    end # Opinion
+  end # OpinionDetectorBasic
+end # Opener

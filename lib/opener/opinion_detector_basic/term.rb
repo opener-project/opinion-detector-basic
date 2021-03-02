@@ -1,7 +1,6 @@
 module Opener
   class OpinionDetectorBasic
     class Term
-
       attr_reader :node, :sentence, :is_conjunction
       attr_accessor :use, :accumulated_strength, :list_ids
 
@@ -155,7 +154,6 @@ module Opener
       def first_sentiment
         @first_sentiment ||= node.xpath('sentiment').first
       end
-
-    end
-  end
-end
+    end # Term
+  end # OpinionDetectorBasic
+end # Opener

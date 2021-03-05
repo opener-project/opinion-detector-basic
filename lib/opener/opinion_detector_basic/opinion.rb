@@ -1,22 +1,23 @@
 module Opener
   class OpinionDetectorBasic
     class Opinion
+
       attr_reader :term
       attr_accessor :left_candidates, :right_candidates, :target_ids, :holders
 
       # Opinion holders for each language code.
       OPINION_HOLDERS = {
-        'nl' => [
-          'ik','we','wij','ze','zij','jullie','u','hij','het','jij','je','mij',
-          'me','hem','haar','ons','hen','hun'
+        'nl' => %w[
+          ik we wij ze zij jullie u hij het jij je mij
+          me hem haar ons hen hun
         ],
-        'en' => ['i','we','he','she','they','it','you'],
-        'es' => [
-          'yo','tu','nosotros','vosotros','ellos','ellas','nosotras','vosotras'
+        'en' => %w[i we he she they it you],
+        'es' => %w[
+          yo tu nosotros vosotros ellos ellas nosotras vosotras
         ],
-        'it' => ['io','tu','noi','voi','loro','lei','lui'],
-        'de' => ['ich','du','wir','ihr','sie','er'],
-        'fr' => ['je','tu','lui','elle','nous','vous','ils','elles']
+        'it' => %w[io tu noi voi loro lei lui],
+        'de' => %w[ich du wir ihr sie er],
+        'fr' => %w[je tu lui elle nous vous ils elles],
       }
 
       def initialize(term)

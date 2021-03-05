@@ -1,6 +1,7 @@
 gem 'slop', '~> 3.0'
 
 require 'slop'
+require 'hashie'
 require 'nokogiri'
 
 require 'rexml/document'
@@ -8,7 +9,11 @@ require 'rexml/formatters/pretty'
 
 require_relative 'opinion_detector_basic/version'
 require_relative 'opinion_detector_basic/cli'
+require_relative 'opinion_detector_basic/term'
+require_relative 'opinion_detector_basic/opinion'
+require_relative 'opinion_detector_basic/base_processor'
 require_relative 'opinion_detector_basic/processor'
+require_relative 'opinion_detector_basic/legacy_processor'
 
 module Opener
   ##
@@ -32,6 +37,7 @@ module Opener
     def initialize(options = {})
       @args    = options.delete(:args) || []
       @options = options
+      @klass   = if ENV['OPINION_LEGACY'] then LegacyProcessor else Processor end
     end
 
     ##
@@ -41,7 +47,7 @@ module Opener
     # @return [String]
     #
     def run input, params = {}
-      return Processor.new(input, options).process
+      @klass.new(input, options).process
     end
 
   end

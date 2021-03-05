@@ -42,6 +42,15 @@ module Opener
       end
 
       ##
+      # Returns the head of the term.
+      #
+      # @return [String]
+      #
+      def head
+        @head ||= node.attr('head')
+      end
+
+      ##
       # Returns the part of speech of the term.
       #
       # @return [String]

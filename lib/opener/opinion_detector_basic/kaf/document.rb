@@ -36,21 +36,21 @@ module Opener
         # Adds the entire opinion in the KAF file.
         #
         def add_opinion opinion, index
-          opinion_node = new_node "opinion", "KAF/opinions"
+          opinion_node = new_node 'opinion', 'KAF/opinions'
           opinion_node['oid'] = "o#{index.to_s}"
 
           unless opinion.holders.empty?
-            opinion_holder_node = new_node "opinion_holder", opinion_node
+            opinion_holder_node = new_node 'opinion_holder', opinion_node
             add_opinion_element opinion_holder_node, opinion.holders
           end
 
-          opinion_target_node = new_node "opinion_target", opinion_node
+          opinion_target_node = new_node 'opinion_target', opinion_node
 
           unless opinion.target_ids.empty?
             add_opinion_element opinion_target_node, opinion.target_ids
           end
 
-          expression_node = new_node "opinion_expression", opinion_node
+          expression_node = new_node 'opinion_expression', opinion_node
           expression_node['polarity'] = opinion.polarity
           expression_node['strength'] = opinion.strength.to_s
 
@@ -72,14 +72,14 @@ module Opener
         # Method for adding opinion holders, targets and expressions.
         #
         def add_opinion_element node, ids
-          lemmas    = terms.select{|t| ids.include?(t.id)}.map(&:lemma).join(" ")
-          comment   = Nokogiri::XML::Comment.new(document, "#{lemmas}")
+          lemmas    = terms.select{|t| ids.include?(t.id)}.map(&:lemma).join(' ')
+          comment   = Nokogiri::XML::Comment.new(document, lemmas)
           node.add_child comment
 
-          span_node = new_node("span", node)
+          span_node = new_node('span', node)
 
           ids.each do |id|
-            target_node       = new_node("target", span_node)
+            target_node       = new_node('target', span_node)
             target_node['id'] = id.to_s
           end
         end

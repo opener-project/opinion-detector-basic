@@ -40,13 +40,13 @@ module Opener
       #
       # @return [String]
       #
-      def pretty_print(document)
+      def pretty_print document
         doc = REXML::Document.new document.to_xml
         doc.context[:attribute_quote] = :quote
         out = ""
         formatter = REXML::Formatters::Pretty.new
         formatter.compact = true
-        formatter.write(doc, out)
+        formatter.write doc, out
 
         out.strip
       end

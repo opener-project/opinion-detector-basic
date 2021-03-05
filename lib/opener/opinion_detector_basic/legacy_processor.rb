@@ -15,23 +15,22 @@ module Opener
           # Initialize opinions with their expressions.
           #
           @opinions = document.terms.map do |term|
-            if term.is_expression? && term.accumulated_strength != 0
-              Kaf::Opinion.new(term)
-            end
+            next unless term.is_expression? and term.accumulated_strength != 0
+            Kaf::Opinion.new term
           end.compact
 
           ##
           # Obtain targets for each opinion.
           #
           @opinions.each do |opinion|
-            opinion.obtain_targets(sentences)
+            opinion.obtain_targets sentences
           end
 
           ##
           # Obtain holders for each opinion.
           #
           @opinions.each do |opinion|
-            opinion.obtain_holders(sentences, document.language)
+            opinion.obtain_holders sentences, document.language
           end
         end
 

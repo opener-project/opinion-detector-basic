@@ -14,9 +14,9 @@ module Opener
           ##
           # Initialize opinions with their expressions.
           #
-          @opinions = terms.map do |term|
+          @opinions = document.terms.map do |term|
             if term.is_expression? && term.accumulated_strength != 0
-              Opinion.new(term)
+              Kaf::Opinion.new(term)
             end
           end.compact
 
@@ -31,29 +31,11 @@ module Opener
           # Obtain holders for each opinion.
           #
           @opinions.each do |opinion|
-            opinion.obtain_holders(sentences, language)
+            opinion.obtain_holders(sentences, document.language)
           end
         end
 
         @opinions
-      end
-
-      ##
-      # Format the output document properly.
-      #
-      # TODO: this should be handled by Oga in a nice way.
-      #
-      # @return [String]
-      #
-      def pretty_print(document)
-        doc = REXML::Document.new document.to_xml
-        doc.context[:attribute_quote] = :quote
-        out = ""
-        formatter = REXML::Formatters::Pretty.new
-        formatter.compact = true
-        formatter.write(doc, out)
-
-        out.strip
       end
 
       protected
@@ -68,7 +50,7 @@ module Opener
       def set_accumulated_strength
         symbol    = :+
         terms_count = terms.count
-        terms.each_with_index do |term, i|
+        terms.each.with_index do |term, i|
           if i+1 < terms_count
             if terms[i+1].is_shifter?
               if term.accumulated_strength != 0
@@ -98,7 +80,7 @@ module Opener
       #
       def apply_modifiers
         terms_count = terms.count
-        terms.each_with_index do |term, i|
+        terms.each.with_index do |term, i|
           if i+1 < terms_count
             if term.use && (term.is_shifter? || term.is_intensifier?)
               terms[i+1].accumulated_strength *= term.accumulated_strength

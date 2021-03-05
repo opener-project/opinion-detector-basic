@@ -5,20 +5,15 @@ module Opener
     #
     class Processor < BaseProcessor
 
-      ##
-      # Processes the input and returns the new KAF output.
-      # @return [String]
-      #
-      def process
-        index = 1
-        opinions.each do |opinion|
-          add_opinion(opinion, index)
-          index += 1
-        end
+      def opinions
+        return @opinions if @opinions
 
-        super
       end
 
+      def set_accumulated_strength
+        terms.each.with_index do |term, i|
+        end
+      end
 
     end
   end

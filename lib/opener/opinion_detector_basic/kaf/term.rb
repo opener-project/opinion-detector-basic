@@ -3,7 +3,9 @@ module Opener
     module Kaf
       class Term
 
+        attr_reader :document
         attr_reader :node, :sentence, :is_conjunction
+
         attr_accessor :use, :accumulated_strength, :list_ids
 
         # Map of conjunctions per language code
@@ -17,13 +19,14 @@ module Opener
           'fr' => %w{, et}
         }
 
-        def initialize(node, document, language)
+        def initialize node, document, language
+          @document             = document
           @node                 = node
-          @sentence             = get_sentence(document)
+          @sentence             = get_sentence document
           @use                  = true
           @accumulated_strength = strength
           @list_ids             = [id]
-          @is_conjunction       = is_conjunction?(language)
+          @is_conjunction       = is_conjunction? language
         end
 
         ##
@@ -50,7 +53,12 @@ module Opener
         # @return [String]
         #
         def head
-          @head ||= node.attr :head
+          @head ||= node.attr(:head).to_i
+        end
+
+        def head_term
+          return if root?
+          document.terms[head-1]
         end
 
         def root?
@@ -101,19 +109,11 @@ module Opener
         # @return [Integer]
         #
         def strength
-          if polarity == "positive"
-            return 1
-          elsif polarity == "negative"
-            return -1
-          end
-
-          if is_intensifier?
-            return 2
-          elsif is_shifter?
-            return -1
-          end
-
-          return 0
+          return  1 if polarity == 'positive'
+          return -1 if polarity == 'negative'
+          return  2 if is_intensifier?
+          return -1 if is_shifter?
+          return  0
         end
 
         ##
@@ -134,7 +134,7 @@ module Opener
         # @return [TrueClass|FalseClass]
         #
         def is_intensifier?
-          sentiment_modifier == "intensifier"
+          sentiment_modifier == 'intensifier'
         end
 
         ##
@@ -143,7 +143,7 @@ module Opener
         # @return [TrueClass|FalseClass]
         #
         def is_shifter?
-          sentiment_modifier == "shifter"
+          sentiment_modifier == 'shifter'
         end
 
         ##
@@ -168,7 +168,7 @@ module Opener
 
         # @return [Oga::XML::Element]
         def first_sentiment
-          @first_sentiment ||= node.xpath('sentiment').first
+          @first_sentiment ||= node.at :sentiment
         end
 
       end

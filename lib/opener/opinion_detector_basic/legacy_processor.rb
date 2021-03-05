@@ -50,26 +50,26 @@ module Opener
         symbol    = :+
         terms_count = terms.count
         terms.each.with_index do |term, i|
-          if i+1 < terms_count
-            if terms[i+1].is_shifter?
-              if term.accumulated_strength != 0
-                terms[i+1].accumulated_strength *= term.accumulated_strength
-                terms[i+1].list_ids += term.list_ids
-                term.use = false
-                symbol = terms[i+1].accumulated_strength > 0 ? :+ : :-
-              else
-                symbol = :*
-              end
-            elsif terms[i+1].is_intensifier?
-              terms[i+1].accumulated_strength = term.accumulated_strength.send(symbol, terms[i+1].accumulated_strength)
+          next unless i+1 < terms_count
+
+          if terms[i+1].is_shifter?
+            if term.accumulated_strength != 0
+              terms[i+1].accumulated_strength *= term.accumulated_strength
+              terms[i+1].list_ids += term.list_ids
               term.use = false
               symbol = terms[i+1].accumulated_strength > 0 ? :+ : :-
-              if term.accumulated_strength != 0
-                terms[i+1].list_ids += term.list_ids
-              end
             else
-              symbol = terms[i+1].accumulated_strength >= 0 ? :+ : :-
+              symbol = :*
             end
+          elsif terms[i+1].is_intensifier?
+            terms[i+1].accumulated_strength = term.accumulated_strength.send(symbol, terms[i+1].accumulated_strength)
+            term.use = false
+            symbol = terms[i+1].accumulated_strength > 0 ? :+ : :-
+            if term.accumulated_strength != 0
+              terms[i+1].list_ids += term.list_ids
+            end
+          else
+            symbol = terms[i+1].accumulated_strength >= 0 ? :+ : :-
           end
         end
       end

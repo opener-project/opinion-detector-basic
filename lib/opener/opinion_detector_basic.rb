@@ -1,5 +1,7 @@
 gem 'slop', '~> 3.0'
 
+require 'active_support/all'
+
 require 'slop'
 require 'hashie'
 require 'nokogiri'

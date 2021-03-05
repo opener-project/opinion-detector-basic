@@ -17,7 +17,7 @@ module Opener
 
         def terms
           @terms ||= document.xpath('KAF/terms/term').map do |term|
-            Term.new(term, document, language)
+            Term.new term, self, language
           end
         end
 
@@ -39,14 +39,14 @@ module Opener
           opinion_node = new_node 'opinion', 'KAF/opinions'
           opinion_node['oid'] = "o#{index.to_s}"
 
-          unless opinion.holders.empty?
+          if opinion.holders.present?
             opinion_holder_node = new_node 'opinion_holder', opinion_node
             add_opinion_element opinion_holder_node, opinion.holders
           end
 
           opinion_target_node = new_node 'opinion_target', opinion_node
 
-          unless opinion.target_ids.empty?
+          if opinion.target_ids.present?
             add_opinion_element opinion_target_node, opinion.target_ids
           end
 

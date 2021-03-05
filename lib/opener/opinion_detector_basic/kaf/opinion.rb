@@ -21,12 +21,13 @@ module Opener
           'fr' => %w[je tu lui elle nous vous ils elles],
         }
 
-        def initialize(term)
-          @term = term
-          @left_candidates = []
-          @right_candidates = []
-          @holders = []
+        def initialize term
+          @term       = term
+          @holders    = []
           @target_ids = []
+
+          @left_candidates  = []
+          @right_candidates = []
         end
 
         ##
@@ -63,11 +64,11 @@ module Opener
         #
         def polarity
           @polarity ||= if strength > 0
-            "positive"
+            'positive'
           elsif strength < 0
-            "negative"
+            'negative'
           else
-            "neutral"
+            'neutral'
           end
         end
 
@@ -164,8 +165,8 @@ module Opener
         #
         # @return [Hash]
         #
-        def filter_candidates(sentence_terms)
-          sentence_terms.select{|t| (t.pos == "N" || t.pos == "R") && !ids.include?(t.id)}
+        def filter_candidates sentence_terms
+          sentence_terms.select{|t| (t.pos == 'N' || t.pos == 'R') && !ids.include?(t.id)}
         end
 
       end

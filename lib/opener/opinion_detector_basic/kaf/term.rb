@@ -74,6 +74,10 @@ module Opener
           @pos ||= node.attr('pos')
         end
 
+        def lexicon_id
+          @lexicon_id ||= node.attr('lexicon-id')
+        end
+
         ##
         # Returns the sentiment modifier type if it exists.
         #

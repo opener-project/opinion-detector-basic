@@ -57,6 +57,10 @@ module Opener
           @strength ||= term.accumulated_strength
         end
 
+        def lexicon_id
+          @lexicon_id ||= term.lexicon_id
+        end
+
         ##
         # Returns the polarity of the opinion.
         #

@@ -53,6 +53,7 @@ module Opener
           expression_node = new_node 'opinion_expression', opinion_node
           expression_node['polarity'] = opinion.polarity
           expression_node['strength'] = opinion.strength.to_s
+          expression_node['lexicon-id'] = opinion.lexicon_id if opinion.lexicon_id
 
           add_opinion_element expression_node, opinion.ids
         end

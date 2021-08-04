@@ -41,6 +41,7 @@ module Opener
     def initialize(options = {})
       @args    = options.delete(:args) || []
       @options = options
+      ENV['OPINION_LEGACY'] = 'true' # Processor is still not working
       @klass   = if ENV['OPINION_LEGACY'] then LegacyProcessor else Processor end
     end
 

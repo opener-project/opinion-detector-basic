@@ -14,6 +14,7 @@ module Opener
           'nl' => %w{, en},
           'en' => %w{, and},
           'es' => %w{, y e},
+          'pt' => %w{, e},
           'it' => %w{, e ed},
           'de' => %w{, und},
           'fr' => %w{, et},
@@ -169,7 +170,7 @@ module Opener
         # Sometimes, comma comes with space after it
         #
         def is_conjunction?(language)
-          pos == 'J' || xpos == ',' || CONJUNCTIONS[language]&.include?(lemma)
+          pos == 'J' || xpos == ',' || lemma == ',' || CONJUNCTIONS[language]&.include?(lemma)
         end
 
         private

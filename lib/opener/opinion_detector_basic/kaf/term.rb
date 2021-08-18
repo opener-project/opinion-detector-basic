@@ -16,7 +16,7 @@ module Opener
           'es' => %w{, y e},
           'it' => %w{, e ed},
           'de' => %w{, und},
-          'fr' => %w{, et}
+          'fr' => %w{, et},
         }
 
         def initialize node, document, language
@@ -72,6 +72,10 @@ module Opener
         #
         def pos
           @pos ||= node.attr('pos')
+        end
+
+        def xpos
+          @xpos ||= node.attr('xpos')
         end
 
         def lexicon_id
@@ -161,11 +165,11 @@ module Opener
 
         ##
         # Checks if a term is a conjunction.
-        #
-        # @return [TrueClass|FalseClass]
+        # Comma is identified as conjunction by default
+        # Sometimes, comma comes with space after it
         #
         def is_conjunction?(language)
-          pos == 'J' || CONJUNCTIONS[language]&.include?(lemma)
+          pos == 'J' || xpos == ',' || CONJUNCTIONS[language]&.include?(lemma)
         end
 
         private

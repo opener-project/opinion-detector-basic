@@ -126,42 +126,15 @@ module Opener
             @left_candidates = filter_candidates(sentence_terms[min..max])
           end
 
-          unless right_candidates.empty?
-            candidate = right_candidates.first
-            @target_ids << candidate.id
+          if right_candidates.any?
+            @target_ids << right_candidates.first.id
           end
-
-          if target_ids.empty?
-            list = mix_lists(right_candidates, left_candidates)
-            list.each do |l|
-              @target_ids << l.id
-              break
-            end
+          if left_candidates.any?
+            @target_ids << left_candidates.first.id
           end
         end
 
         protected
-
-        ##
-        # If there are no opinion targets, right and left candidates
-        # are mixed into one list and the first one is picked as the target.
-        #
-        # @return [Array]
-        #
-        def mix_lists(lista, listb)
-          list = []
-          min = [lista.count, listb.count].min
-          (0..min).each do |i|
-            list << lista[i]
-            list << listb[i]
-            if lista.count > listb.count
-              list << lista[min]
-            elsif listb.count > lista.count
-              list << listb[min]
-            end
-          end
-          return list.compact
-        end
 
         ##
         # Filters candidate terms depending on their part of speech and if

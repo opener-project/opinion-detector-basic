@@ -130,7 +130,7 @@ module Opener
             @target_ids << right_candidates.first.id
           end
           if left_candidates.any?
-            @target_ids << left_candidates.first.id
+            @target_ids << left_candidates.last.id
           end
         end
 

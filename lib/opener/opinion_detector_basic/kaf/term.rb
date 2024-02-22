@@ -170,7 +170,11 @@ module Opener
         # Sometimes, comma comes with space after it
         #
         def is_conjunction?(language)
-          pos == 'J' || xpos == ',' || lemma == ',' || CONJUNCTIONS[language]&.include?(lemma)
+          is_punct? || pos == 'J' || CONJUNCTIONS[language]&.include?(lemma)
+        end
+
+        def is_punct?
+          pos == '.' || lemma == '-' || xpos == ',' || lemma == ','
         end
 
         private

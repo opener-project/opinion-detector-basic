@@ -109,7 +109,7 @@ module Opener
           unless index+1 >= terms_count
             min = index+1
             max = [index+1+max_distance,terms_count].min
-            @right_candidates = filter_candidates(sentence_terms[min..max])
+            @right_candidates = filter_candidates sentence_terms[min..max]
           end
 
           index = 0
@@ -123,7 +123,7 @@ module Opener
           unless index == 0
             min = [0, index-1-max_distance].max
             max = index
-            @left_candidates = filter_candidates(sentence_terms[min..max])
+            @left_candidates = filter_candidates sentence_terms[min..max].reverse
           end
 
           if right_candidates.any?
@@ -143,7 +143,8 @@ module Opener
         # @return [Hash]
         #
         def filter_candidates sentence_terms
-          sentence_terms.select{|t| (t.pos == 'N' || t.pos == 'R') && !ids.include?(t.id)}
+          filtered = sentence_terms.take_while{ |t| !t.is_punct? } # stop on punctuation
+          filtered.select{ |t| (t.pos == 'N' || t.pos == 'R') && !ids.include?(t.id) }
         end
 
       end
